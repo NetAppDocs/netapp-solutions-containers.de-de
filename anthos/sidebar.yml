@@ -1,0 +1,47 @@
+---
+section: anthos
+title: Anthos mit NetApp
+pdf-filename: Anthos mit NetApp
+entries:
+- title: Lösungsübersicht
+  url: "/anthos/anthos-solution-overview.html"
+- title: Erfahren Sie mehr über Anthos
+  entries:
+  - title: Anthos-Übersicht
+    url: "/anthos/anthos-overview.html"
+  - title: Anthos-Cluster auf VMware
+    url: "/anthos/anthos-vmw.html"
+  - title: Anthos auf Bare Metal
+    url: "/anthos/anthos-bm.html"
+- title: NetApp Speichersysteme
+  entries:
+  - title: Übersicht über NetApp -Speichersysteme
+    url: "/anthos/anthos-netapp-overview.html"
+  - title: NetApp ONTAP
+    url: "/anthos/anthos-netapp-ontap.html"
+- title: NetApp Storage-Integrationen
+  entries:
+  - title: Übersicht über NetApp -Speicherintegrationen
+    url: "/anthos/anthos-storint-overview.html"
+  - title: NetApp Trident -Übersicht
+    url: "/anthos/anthos-trident-overview.html"
+- title: Erweiterte Konfigurationsoptionen
+  entries:
+  - title: Informationen zu erweiterten Konfigurationsoptionen
+    url: "/anthos/anthos-advanced-overview.html"
+  - title: Entdecken Sie die Load Balancer-Optionen
+    entries:
+    - title: Informationen zu Load Balancer-Optionen
+      url: "/anthos/anthos-load-balancers.html"
+    - title: Installieren Sie F5 BIG-IP-Load Balancer
+      url: "/anthos/anthos-f5bigip-lb.html"
+    - title: Installieren Sie MetalLB-Load Balancer
+      url: "/anthos/anthos-metallb.html"
+    - title: Installieren Sie SeeSaw-Load Balancer
+      url: "/anthos/anthos-seesaw-lb.html"
+- title: Lösungsvalidierung und Anwendungsfälle
+  entries:
+  - title: Bereitstellen einer App im Anthos-Cluster
+    url: "/anthos/anthos-deploy-app-cloud-console.html"
+- title: Weitere Informationen
+  url: "/anthos/anthos-additional-information.html"

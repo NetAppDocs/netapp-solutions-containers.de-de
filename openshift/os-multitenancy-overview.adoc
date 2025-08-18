@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-multitenancy-overview.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, Multitenancy, Multi-tenancy 
+summary: Konfigurieren von Multitenancy auf Red Hat OpenShift mit NetApp 
+---
+= Konfigurieren von Multitenancy auf Red Hat OpenShift mit NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Viele Organisationen, die mehrere Anwendungen oder Workloads auf Containern ausführen, neigen dazu, einen Red Hat OpenShift-Cluster pro Anwendung oder Workload bereitzustellen.  Dadurch können sie eine strikte Isolierung der Anwendung oder Arbeitslast implementieren, die Leistung optimieren und Sicherheitslücken reduzieren.  Allerdings bringt die Bereitstellung eines separaten Red Hat OpenShift-Clusters für jede Anwendung eigene Probleme mit sich.  Es erhöht den Betriebsaufwand, da jeder Cluster einzeln überwacht und verwaltet werden muss, erhöht die Kosten aufgrund dedizierter Ressourcen für verschiedene Anwendungen und behindert eine effiziente Skalierbarkeit.
+
+Um diese Probleme zu überwinden, kann man in Erwägung ziehen, alle Anwendungen oder Workloads in einem einzigen Red Hat OpenShift-Cluster auszuführen.  Doch in einer solchen Architektur stellen die Isolierung von Ressourcen und Sicherheitslücken in der Anwendung eine der größten Herausforderungen dar.  Jede Sicherheitslücke in einer Arbeitslast kann natürlich auf eine andere Arbeitslast übergreifen und so den Auswirkungsbereich vergrößern.  Darüber hinaus kann jede abrupte, unkontrollierte Ressourcennutzung durch eine Anwendung die Leistung einer anderen Anwendung beeinträchtigen, da standardmäßig keine Richtlinie zur Ressourcenzuweisung vorhanden ist.
+
+Daher suchen Unternehmen nach Lösungen, die das Beste aus beiden Welten vereinen, indem sie ihnen beispielsweise ermöglichen, alle ihre Workloads in einem einzigen Cluster auszuführen und ihnen dennoch die Vorteile eines dedizierten Clusters für jede Workload bieten.
+
+Eine solche effektive Lösung besteht darin, Multitenancy auf Red Hat OpenShift zu konfigurieren.  Multitenancy ist eine Architektur, die die Koexistenz mehrerer Mandanten auf demselben Cluster mit angemessener Isolierung von Ressourcen, Sicherheit usw. ermöglicht.  In diesem Kontext kann ein Mandant als eine Teilmenge der Clusterressourcen betrachtet werden, die für die Verwendung durch eine bestimmte Benutzergruppe zu einem exklusiven Zweck konfiguriert sind.  Das Konfigurieren von Multitenancy auf einem Red Hat OpenShift-Cluster bietet die folgenden Vorteile:
+
+* Eine Reduzierung der Investitions- und Betriebskosten durch die gemeinsame Nutzung von Clusterressourcen
+* Geringerer Betriebs- und Verwaltungsaufwand
+* Schutz der Workloads vor Kreuzkontamination durch Sicherheitsverletzungen
+* Schutz von Workloads vor unerwarteten Leistungseinbußen aufgrund von Ressourcenkonflikten
+
+
+Für einen vollständig realisierten Multitenant-OpenShift-Cluster müssen Kontingente und Einschränkungen für Clusterressourcen konfiguriert werden, die zu verschiedenen Ressourcenbereichen gehören: Compute, Speicher, Netzwerk, Sicherheit usw.  Obwohl wir bestimmte Aspekte aller Ressourcenbereiche in dieser Lösung abdecken, konzentrieren wir uns auf bewährte Methoden zum Isolieren und Sichern der Daten, die von mehreren Workloads auf demselben Red Hat OpenShift-Cluster bereitgestellt oder genutzt werden, indem wir Multitenancy auf Speicherressourcen konfigurieren, die dynamisch von Trident zugewiesen werden, unterstützt von NetApp ONTAP.

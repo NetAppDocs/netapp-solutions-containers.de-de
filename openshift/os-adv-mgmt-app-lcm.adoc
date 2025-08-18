@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-adv-mgmt-app-lcm.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, ONTAP, Trident, Red Hat OpenShift, Advanced Cluster Management, Advanced Cluster Management for Kubernetes 
+summary: Erweitertes Cluster-Management für Kubernetes auf Red Hat OpenShift mit NetApp 
+---
+= Anwendungslebenszyklusverwaltung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+So erstellen Sie eine Anwendung und verwalten sie über mehrere Cluster hinweg:
+
+. Navigieren Sie in der Seitenleiste zu „Anwendungen verwalten“ und klicken Sie auf „Anwendung erstellen“.  Geben Sie die Details der Anwendung ein, die Sie erstellen möchten, und klicken Sie auf „Speichern“.
++
+image:redhat-openshift-078.png["Anwendung erstellen"]
+
+. Nachdem die Anwendungskomponenten installiert wurden, wird die Anwendung in der Liste angezeigt.
++
+image:redhat-openshift-079.png["Anwendungsliste"]
+
+. Die Anwendung kann jetzt von der Konsole aus überwacht und verwaltet werden.
+

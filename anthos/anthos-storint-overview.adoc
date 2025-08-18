@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: anthos/anthos-storint-overview.html 
+keywords: Trident, Trident, persistent storage 
+summary: NetApp bietet eine Reihe von Produkten, die unsere Kunden bei der Orchestrierung und Verwaltung persistenter Daten in containerbasierten Umgebungen wie Anthos unterstützen. 
+---
+= Übersicht zur NetApp Storage-Integration
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp bietet eine Reihe von Produkten, die unsere Kunden bei der Orchestrierung und Verwaltung persistenter Daten in containerbasierten Umgebungen wie Anthos unterstützen.
+
+
+
+== Anthos Ready-Speicherpartnerprogramm.
+
+Google Cloud fordert über sein Anthos Ready-Speicherpartnerprogramm regelmäßig eine aktualisierte Validierung der Partnerspeicherintegrationen mit neuen Versionen von Anthos an.  Eine Liste der aktuell validierten Speicherlösungen, CSI-Treiber, verfügbaren Funktionen und der unterstützten Anthos-Versionen finden Sie https://cloud.google.com/anthos/docs/resources/partner-storage["hier,"^] .
+
+NetApp hat die Anforderungen zur Validierung unseres Trident CSI-kompatiblen Speicherorchestrators und unseres ONTAP Speichersystems mit Versionen von Anthos vierteljährlich regelmäßig erfüllt.
+
+Die folgende Tabelle enthält die Anthos-Versionen, die von NetApp und NetApp -Partneringenieuren zur Validierung der NetApp Trident CSI-Treiber und Funktionssätze im Rahmen des Anthos Ready Storage-Partnerprogramms getestet wurden:
+
+|===
+
+
+| Bereitstellungstyp | Version | Speichersystem | Trident -Version | Protokoll | Features 
+
+
+| VMware | 1,28 | ONTAP 9.12.1 | 24,02 | NAS | Multiwriter, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,28 | ONTAP 9.12.1 | 24,02 | SAN | Rohblock, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,15 | ONTAP 9.12.1 | 23,04 | NAS | Multiwriter, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,15 | ONTAP 9.12.1 | 23,04 | SAN | Rohblock, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,14 | ONTAP 9.12.1 | 23,01 | NAS | Multiwriter, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,14 | ONTAP 9.12.1 | 23,01 | SAN | Rohblock, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,13 | ONTAP 9.12.1 | 22,10 | NAS | Multiwriter, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,13 | ONTAP 9.12.1 | 22,10 | SAN | Rohblock, Volume-Erweiterung, SnapShots, PVCDataSource 
+
+
+| VMware | 1,11 | ONTAP 9.9.1 | 22,04 | NAS | Multiwriter, Volume-Erweiterung, SnapShots 
+
+
+| VMware | 1,11 | ONTAP 9.9.1 | 22,04 | SAN | Rohblock, Volumenerweiterung, SnapShots 
+
+
+| VMware | 1,11 | Element 12.3 | 22,04 | SAN | Rohblock, Volumenerweiterung, SnapShots 
+
+
+| blankes Metall | 1,10 | ONTAP 9.8 | 22,01 | NAS | Multiwriter, Volume-Erweiterung, SnapShots 
+
+
+| blankes Metall | 1,10 | ONTAP 9.8 | 22,01 | SAN | Rohblock, Volumenerweiterung, SnapShots 
+|===
+
+
+== NetApp Storage-Integrationen
+
+NetApp bietet eine Reihe von Produkten, die Sie bei der Orchestrierung und Verwaltung persistenter Daten in containerbasierten Umgebungen wie Anthos unterstützen.
+
+NetApp Trident ist ein Open-Source-Speicherorchestrator mit vollem Support für Container und Kubernetes-Distributionen, einschließlich Anthos.  Weitere Informationen finden Sie auf der Trident -Website https://docs.netapp.com/us-en/trident/index.html["hier,"] .
+
+Auf den folgenden Seiten finden Sie zusätzliche Informationen zu den NetApp -Produkten, die für die Anwendungs- und persistente Speicherverwaltung in der Anthos-Lösung mit NetApp validiert wurden.

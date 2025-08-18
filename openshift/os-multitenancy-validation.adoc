@@ -1,0 +1,209 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-multitenancy-validation.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, Multitenancy, Multi-tenancy 
+summary: Konfigurieren von Multitenancy auf Red Hat OpenShift mit NetApp 
+---
+= Validierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Führen Sie die folgenden Schritte aus, um die in den vorherigen Schritten konfigurierte Multitenant-Architektur zu validieren:
+
+
+
+== Validieren Sie den Zugriff zum Erstellen von PVCs oder Pods im zugewiesenen Projekt
+
+. Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
+. Überprüfen Sie den Zugriff, um ein neues Projekt zu erstellen.
++
+[source, console]
+----
+oc create ns sub-project-1
+----
+. Erstellen Sie einen PVC in Projekt 1 unter Verwendung der Speicherklasse, die Projekt 1 zugewiesen ist.
++
+[source, console]
+----
+cat << EOF | oc create -f -
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc-project-1
+  namespace: project-1
+  annotations:
+    trident.netapp.io/reclaimPolicy: Retain
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: project-1-sc
+EOF
+----
+. Überprüfen Sie das mit dem PVC verknüpfte PV.
++
+[source, console]
+----
+oc get pv
+----
+. Überprüfen Sie, ob das PV und sein Volume in einer SVM erstellt werden, die für Projekt 1 auf NetApp ONTAP vorgesehen ist.
++
+[source, console]
+----
+volume show -vserver project-1-svm
+----
+. Erstellen Sie einen Pod in Projekt 1 und mounten Sie das im vorherigen Schritt erstellte PVC.
++
+[source, console]
+----
+cat << EOF | oc create -f -
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pvc-pod
+  namespace: project-1
+spec:
+  volumes:
+    - name: test-pvc-project-1
+      persistentVolumeClaim:
+       claimName: test-pvc-project-1
+  containers:
+    - name: test-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: test-pvc-project-1
+EOF
+----
+. Überprüfen Sie, ob der Pod ausgeführt wird und ob er das Volume gemountet hat.
++
+[source, console]
+----
+oc describe pods test-pvc-pod -n project-1
+----
+
+
+
+
+== Validieren Sie den Zugriff, um PVCs oder Pods in einem anderen Projekt zu erstellen oder Ressourcen zu verwenden, die einem anderen Projekt zugewiesen sind.
+
+. Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
+. Erstellen Sie einen PVC in Projekt 1 unter Verwendung der Speicherklasse, die Projekt 2 zugewiesen ist.
++
+[source, console]
+----
+cat << EOF | oc create -f -
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc-project-1-sc-2
+  namespace: project-1
+  annotations:
+    trident.netapp.io/reclaimPolicy: Retain
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: project-2-sc
+EOF
+----
+. Erstellen Sie ein PVC in Projekt 2.
++
+[source, console]
+----
+cat << EOF | oc create -f -
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc-project-2-sc-1
+  namespace: project-2
+  annotations:
+    trident.netapp.io/reclaimPolicy: Retain
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: project-1-sc
+EOF
+----
+. Stellen Sie sicher, dass PVCs `test-pvc-project-1-sc-2` Und `test-pvc-project-2-sc-1` wurden nicht erstellt.
++
+[source, console]
+----
+oc get pvc -n project-1
+oc get pvc -n project-2
+----
+. Erstellen Sie einen Pod in Projekt 2.
++
+[source, console]
+----
+cat << EOF | oc create -f -
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pvc-pod
+  namespace: project-1
+spec:
+  containers:
+    - name: test-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+EOF
+----
+
+
+
+
+== Überprüfen Sie den Zugriff zum Anzeigen und Bearbeiten von Projekten, Ressourcenkontingenten und Speicherklassen.
+
+. Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
+. Überprüfen Sie den Zugriff, um neue Projekte zu erstellen.
++
+[source, console]
+----
+oc create ns sub-project-1
+----
+. Bestätigen Sie den Zugriff, um Projekte anzuzeigen.
++
+[source, console]
+----
+oc get ns
+----
+. Überprüfen Sie, ob der Benutzer ResourceQuotas in Projekt 1 anzeigen oder bearbeiten kann.
++
+[source, console]
+----
+oc get resourcequotas -n project-1
+oc edit resourcequotas project-1-sc-rq -n project-1
+----
+. Überprüfen Sie, ob der Benutzer Zugriff auf die Anzeige der Speicherklassen hat.
++
+[source, console]
+----
+oc get sc
+----
+. Überprüfen Sie den Zugriff, um die Speicherklassen zu beschreiben.
+. Überprüfen Sie den Zugriff des Benutzers zum Bearbeiten der Speicherklassen.
++
+[source, console]
+----
+oc edit sc project-1-sc
+----
+

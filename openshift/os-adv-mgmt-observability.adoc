@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-adv-mgmt-observability.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, ONTAP, Trident, Red Hat OpenShift, Advanced Cluster Management, Advanced Cluster Management for Kubernetes 
+summary: Erweitertes Cluster-Management für Kubernetes auf Red Hat OpenShift mit NetApp 
+---
+= Beobachtbarkeit
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Advanced Cluster Management für Kubernetes bietet eine Möglichkeit, die Knoten, Pods und Anwendungen sowie die Workloads aller Cluster zu überwachen.
+
+. Navigieren Sie zu „Umgebungen beobachten“ > „Übersicht“.
++
+image:redhat-openshift-082.png["Observability-Startseite"]
+
+. Alle Pods und Workloads in allen Clustern werden überwacht und anhand verschiedener Filter sortiert.  Klicken Sie auf Pods, um die entsprechenden Daten anzuzeigen.
++
+image:redhat-openshift-083.png["Pods beobachten"]
+
+. Alle Knoten in den Clustern werden anhand einer Vielzahl von Datenpunkten überwacht und analysiert.  Klicken Sie auf Knoten, um mehr Einblick in die entsprechenden Details zu erhalten.
++
+image:redhat-openshift-084.png["Knoten beobachten"]
+
+. Alle Cluster werden basierend auf verschiedenen Clusterressourcen und -parametern überwacht und organisiert.  Klicken Sie auf „Cluster“, um Clusterdetails anzuzeigen.
++
+image:redhat-openshift-085.png["Cluster beobachten"]
+
+

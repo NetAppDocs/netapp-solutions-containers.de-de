@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-multitenancy-configuration.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, Multitenancy, Multi-tenancy 
+summary: Konfigurieren von Multitenancy auf Red Hat OpenShift mit NetApp 
+---
+= Konfiguration
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei jeder Multitenant-Lösung kann kein Benutzer auf mehr Clusterressourcen zugreifen als erforderlich.  Daher wird der gesamte Satz an Ressourcen, der im Rahmen der Multitenancy-Konfiguration konfiguriert werden soll, zwischen Cluster-Administrator, Speicheradministrator und Entwicklern aufgeteilt, die an den einzelnen Projekten arbeiten.
+
+In der folgenden Tabelle sind die verschiedenen Aufgaben aufgeführt, die von verschiedenen Benutzern ausgeführt werden müssen:
+
+|===
+| Rolle | Aufgaben 
+
+
+.4+| *Cluster-Administrator* | Erstellen Sie Projekte für verschiedene Anwendungen oder Workloads 
+
+
+| Erstellen Sie ClusterRoles und RoleBindings für Storage-Admin 
+
+
+| Erstellen Sie Rollen und RoleBindings für Entwickler, die Zugriff auf bestimmte Projekte zuweisen 
+
+
+| [Optional] Konfigurieren Sie Projekte, um Pods auf bestimmten Knoten zu planen 
+
+
+.4+| *Speicheradministrator* | Erstellen Sie SVMs auf NetApp ONTAP 
+
+
+| Erstellen Sie Trident -Backends 
+
+
+| Erstellen von StorageClasses 
+
+
+| Erstellen von Speicherressourcenkontingenten 
+
+
+.3+| *Entwickler* | Validieren Sie den Zugriff zum Erstellen oder Patchen von PVCs oder Pods im zugewiesenen Projekt 
+
+
+| Validieren Sie den Zugriff zum Erstellen oder Patchen von PVCs oder Pods in einem anderen Projekt 
+
+
+| Überprüfen Sie den Zugriff zum Anzeigen oder Bearbeiten von Projekten, Ressourcenkontingenten und Speicherklassen. 
+|===

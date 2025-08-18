@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-trident-protect.html 
+keywords: data protection, DP, Trident Protect 
+summary:  
+---
+= Datenschutz für Container-Apps und VMs mit Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Diese Lösung zeigt, wie Sie mit Trident Protect Datenschutzvorgänge für Container und VMs durchführen.
+
+. Weitere Informationen zum Erstellen von Snapshots und Backups sowie zur Wiederherstellung daraus für Containeranwendungen in der OpenShift Container-Plattform finden Sie unterlink:https://docs.netapp.com/us-en/netapp-solutions-cloud/openshift/os-dp-tp-solution.html["hier,"^] .
+. Weitere Informationen zum Erstellen und Wiederherstellen aus einem Backup für VMs in OpenShift Virtualization, die auf der OpenShift Container-Plattform bereitgestellt werden, finden Sie unterlink:https://docs.netapp.com/us-en/netapp-solutions-virtualization/openshift/osv-vm-dp-using-tp.html["hier,"^] .
+

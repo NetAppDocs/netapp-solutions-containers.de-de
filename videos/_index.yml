@@ -1,0 +1,33 @@
+---
+indexpage:
+  title: Sehen Sie sich Videos und Demos zu Containern mit NetApp an
+  summary: Eine Reihe von Videos und Demos, die die Funktionen vieler Containerlösungen
+    von NetApp erläutern
+  lead: Entdecken Sie die umfassende Videobibliothek von NetApp, in der Containerlösungen
+    für die Plattformen Anthos, OpenShift und VMware Tanzu vorgestellt werden.  Jede
+    Sammlung konzentriert sich auf bestimmte Anwendungsfälle und Integrationsszenarien.
+  tiles:
+  - title: Anthos mit NetApp
+    links:
+    - title: Bereitstellung und Einrichtung von Anthos
+      url: anthos-videos.html#anthos-deployment-and-setup-on-bare-metal
+    - title: Bereitstellung und Einrichtung von Trident
+      url: anthos-videos.html#trident-deployment-and-setup-on-anthos
+  - title: Red Hat OpenShift mit NetApp
+    links:
+    - title: Notfallwiederherstellung und Datenschutz
+      url: openshift-videos.html#disaster-recovery-and-data-protection
+    - title: OpenShift-Virtualisierung und VM-Verwaltung
+      url: openshift-videos.html#openshift-virtualization-and-vm-management
+    - title: Anwendungsbereitstellung und -speicherung
+      url: openshift-videos.html#application-deployment-and-storage
+    - title: Automatisierung und Integration
+      url: openshift-videos.html#automation-and-integration
+    - title: Cloud- und Hybridintegrationen
+      url: openshift-videos.html#cloud-and-hybrid-integrations
+  - title: VMware Tanzu mit NetApp
+    links:
+    - title: Bereitstellung von persistentem Speicher
+      url: tanzu-videos.html#persistent-storage-provisioning
+    - title: Anwendungsklonen und Datenschutz
+      url: tanzu-videos.html#application-cloning-and-data-protection

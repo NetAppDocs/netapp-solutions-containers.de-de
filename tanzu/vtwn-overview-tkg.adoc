@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: tanzu/vtwn-overview-tkg.html 
+keywords: VMware Tanzu, Tanzu, Tanzu Kubernetes Grid, DevOps, Netapp, Trident, Trident Protect 
+summary:  
+---
+= Übersicht über VMware Tanzu Kubernetes Grid (TKG).
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit VMware Tanzu Kubernetes Grid, auch bekannt als TKG, können Sie Tanzu Kubernetes-Cluster in Hybrid-Cloud- oder Public-Cloud-Umgebungen bereitstellen.  TKG wird als Verwaltungscluster installiert, der selbst ein Kubernetes-Cluster ist, der die Tanzu Kubernetes-Cluster bereitstellt und betreibt.  Diese Tanzu Kubernetes-Cluster sind die Workload-Kubernetes-Cluster, auf denen die eigentliche Workload bereitgestellt wird.
+
+Tanzu Kubernetes Grid baut auf einigen vielversprechenden Upstream-Community-Projekten auf und bietet eine Kubernetes-Plattform, die von VMware entwickelt, vermarktet und unterstützt wird.  Zusätzlich zur Kubernetes-Verteilung bietet Tanzu Kubernetes Grid zusätzliche Add-Ons, bei denen es sich um wichtige Dienste auf Produktionsniveau handelt, wie etwa Registrierung, Lastausgleich, Authentifizierung usw.  VMware TKG mit Management-Cluster wird häufig in vSphere 6.7-Umgebungen verwendet und ist, obwohl es unterstützt wird, keine empfohlene Bereitstellung für vSphere 7-Umgebungen, da TKGS über native Integrationsfunktionen mit vSphere 7 verfügt.
+
+image:vtwn-002.png["VMware Tanzu Kubernetes Grid mit Management-Cluster"]
+
+Weitere Informationen zu Tanzu Kubernetes Grid finden Sie in der Dokumentationlink:https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.5/vmware-tanzu-kubernetes-grid-15/GUID-release-notes.html["hier,"^] .
+
+Je nachdem, ob Tanzu Kubernetes Grid vor Ort auf einem vSphere-Cluster oder in Cloud-Umgebungen installiert wird, bereiten Sie Tanzu Kubernetes Grid vor und stellen Sie es bereit, indem Sie der Installationsanleitung folgen.link:https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.5/vmware-tanzu-kubernetes-grid-15/GUID-mgmt-clusters-prepare-deployment.html["hier,"^] .
+
+Nachdem Sie den Verwaltungscluster für Tanzu Kubernetes Grid installiert haben, stellen Sie die Benutzercluster oder Workloadcluster nach Bedarf bereit, indem Sie der Dokumentation folgen.link:https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.5/vmware-tanzu-kubernetes-grid-15/GUID-tanzu-k8s-clusters-index.html["hier,"^] .  Für den VMware TKG-Verwaltungscluster ist die Bereitstellung eines SSH-Schlüssels für die Installation und den Betrieb von Tanzu Kubernetes-Clustern erforderlich.  Mit diesem Schlüssel können Sie sich bei den Clusterknoten anmelden, indem Sie `capv` Benutzer.

@@ -1,0 +1,30 @@
+---
+sidebar: sidebar 
+permalink: videos/anthos-videos.html 
+keywords: video, demonstration, deployment 
+summary: Demonstriert einige der in diesem Dokument dokumentierten Funktionen. 
+---
+= Videos zu Anthos mit NetApp ansehen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Entdecken Sie die wichtigsten Funktionen und Bereitstellungsszenarien für NetApp mit Google Anthos anhand einer kuratierten Auswahl an Videos und Demonstrationen.  Diese Ressourcen zeigen Best Practices, Integrationsschritte und Anwendungsfälle aus der Praxis.
+
+
+
+== Anthos-Bereitstellung und -Einrichtung auf Bare Metal
+
+.Anthos auf Bare Metal bereitstellen – Anthos mit NetApp
+video::a9e5fd88-6bdc-4d23-a4b5-b01200effc06[panopto,width=360]
+
+
+== Bereitstellung und Einrichtung von Trident auf Anthos
+
+.Trident auf Anthos 1.14-Cluster bereitstellen
+video::8ea4c03a-85e9-4d90-bf3c-afb6011b051c[panopto,width=360]

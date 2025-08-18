@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-netapp-element.html 
+keywords: NetApp, Element, Solidfire, iSCSI 
+summary: Die NetApp Element -Software bietet modulare, skalierbare Leistung, wobei jeder Speicherknoten garantierte Kapazität und Durchsatz für die Umgebung bereitstellt.  NetApp Element -Systeme können von 4 auf 100 Knoten in einem einzigen Cluster skaliert werden und bieten eine Reihe erweiterter Speicherverwaltungsfunktionen. 
+---
+= NetApp Element: Red Hat OpenShift mit NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die NetApp Element -Software bietet modulare, skalierbare Leistung, wobei jeder Speicherknoten garantierte Kapazität und Durchsatz für die Umgebung bereitstellt.  NetApp Element -Systeme können von 4 auf 100 Knoten in einem einzigen Cluster skaliert werden und bieten eine Reihe erweiterter Speicherverwaltungsfunktionen.
+
+image:redhat-openshift-064.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+
+Weitere Informationen zu NetApp Element -Speichersystemen finden Sie auf der https://www.netapp.com/data-storage/solidfire/["NetApp Solidfire-Website"^] .
+
+
+
+== iSCSI-Anmeldeumleitung und Selbstheilungsfunktionen
+
+Die NetApp Element -Software nutzt das iSCSI-Speicherprotokoll, eine Standardmethode zum Kapseln von SCSI-Befehlen in einem herkömmlichen TCP/IP-Netzwerk.  Wenn sich die SCSI-Standards ändern oder die Leistung von Ethernet-Netzwerken verbessert wird, profitiert das iSCSI-Speicherprotokoll, ohne dass Änderungen erforderlich sind.
+
+Obwohl alle Speicherknoten über eine Verwaltungs-IP und eine Speicher-IP verfügen, gibt die NetApp Element -Software eine einzige virtuelle Speicher-IP-Adresse (SVIP-Adresse) für den gesamten Speicherverkehr im Cluster bekannt.  Als Teil des iSCSI-Anmeldevorgangs kann der Speicher antworten, dass das Zielvolume an eine andere Adresse verschoben wurde und daher der Verhandlungsprozess nicht fortgesetzt werden kann.  Der Host sendet dann die Anmeldeanforderung erneut an die neue Adresse in einem Prozess, der keine Neukonfiguration auf Hostseite erfordert.  Dieser Vorgang wird als iSCSI-Anmeldeumleitung bezeichnet.
+
+Die iSCSI-Anmeldeumleitung ist ein wichtiger Bestandteil des NetApp Element -Softwareclusters.  Wenn eine Host-Anmeldeanforderung eingeht, entscheidet der Knoten basierend auf den IOPS und den Kapazitätsanforderungen für das Volume, welches Mitglied des Clusters den Datenverkehr verarbeiten soll.  Volumes werden über den NetApp Element -Softwarecluster verteilt und neu verteilt, wenn ein einzelner Knoten zu viel Datenverkehr für seine Volumes verarbeitet oder wenn ein neuer Knoten hinzugefügt wird.  Mehrere Kopien eines bestimmten Volumes werden über das Array verteilt.
+
+Auf diese Weise hat eine auf einen Knotenausfall folgende Neuverteilung des Volumes keine Auswirkungen auf die Hostkonnektivität, abgesehen von einer Abmeldung und Anmeldung mit Umleitung zum neuen Standort.  Mit der iSCSI-Anmeldeumleitung ist ein NetApp Element -Softwarecluster eine selbstheilende, skalierbare Architektur, die unterbrechungsfreie Upgrades und Vorgänge ermöglicht.
+
+
+
+== NetApp Element Softwarecluster QoS
+
+Ein NetApp Element -Softwarecluster ermöglicht die dynamische Konfiguration von QoS auf Volume-Basis.  Sie können QoS-Einstellungen pro Volume verwenden, um die Speicherleistung basierend auf den von Ihnen definierten SLAs zu steuern.  Die folgenden drei konfigurierbaren Parameter definieren die QoS:
+
+* *Mindest-IOPS.*  Die Mindestanzahl dauerhafter IOPS, die der NetApp Element -Softwarecluster einem Volume bereitstellt.  Der für ein Volume konfigurierte Mindest-IOPS-Wert ist das garantierte Leistungsniveau für ein Volume.  Die Leistung pro Volumen fällt nicht unter dieses Niveau.
+* *Maximale IOPS.*  Die maximale Anzahl dauerhafter IOPS, die der NetApp Element -Softwarecluster einem bestimmten Volume bereitstellt.
+* *Burst-IOPS.*  Die maximale Anzahl an IOPS, die in einem Short-Burst-Szenario zulässig ist.  Die Einstellung der Burst-Dauer ist konfigurierbar, der Standardwert beträgt 1 Minute.  Wenn ein Volume unterhalb des maximalen IOPS-Levels ausgeführt wurde, werden Burst-Guthaben angesammelt.  Wenn die Leistungsstufen sehr hoch werden und ausgereizt werden, sind auf dem Volume kurze IOPS-Spitzen über den maximalen IOPS-Wert hinaus zulässig.
+
+
+
+
+== Mandantenfähigkeit
+
+Sichere Mandantenfähigkeit wird durch die folgenden Funktionen erreicht:
+
+* *Sichere Authentifizierung.*  Für den sicheren Volume-Zugriff wird das Challenge-Handshake Authentication Protocol (CHAP) verwendet.  Für den sicheren Zugriff auf den Cluster zur Verwaltung und Berichterstellung wird das Lightweight Directory Access Protocol (LDAP) verwendet.
+* *Volume Access Groups (VAGs).*  Optional können VAGs anstelle der Authentifizierung verwendet werden, indem eine beliebige Anzahl iSCSI-initiatorspezifischer iSCSI Qualified Names (IQNs) einem oder mehreren Volumes zugeordnet wird.  Um auf ein Volume in einer VAG zuzugreifen, muss sich der IQN des Initiators in der Liste der zulässigen IQNs für die Volumegruppe befinden.
+* *Virtuelle LANs (VLANs) des Mandanten.*  Auf Netzwerkebene wird die End-to-End-Netzwerksicherheit zwischen iSCSI-Initiatoren und dem NetApp Element -Softwarecluster durch die Verwendung von VLANs erleichtert.  Für jedes VLAN, das zur Isolierung einer Arbeitslast oder eines Mandanten erstellt wird, erstellt die NetApp Element Software eine separate iSCSI-Ziel-SVIP-Adresse, auf die nur über das spezifische VLAN zugegriffen werden kann.
+* *VRF-fähige VLANs.*  Um die Sicherheit und Skalierbarkeit im Rechenzentrum weiter zu unterstützen, können Sie mit der NetApp Element -Software jedes beliebige Tenant-VLAN für VRF-ähnliche Funktionen aktivieren.  Diese Funktion fügt diese beiden wichtigen Funktionen hinzu:
++
+** *L3-Routing zu einer SVIP-Adresse des Mandanten.*  Mit dieser Funktion können Sie iSCSI-Initiatoren in einem anderen Netzwerk oder VLAN als dem des NetApp Element -Softwareclusters platzieren.
+** *Überlappende oder doppelte IP-Subnetze.*  Mit dieser Funktion können Sie Mandantenumgebungen eine Vorlage hinzufügen, sodass jedem jeweiligen Mandanten-VLAN IP-Adressen aus demselben IP-Subnetz zugewiesen werden können.  Diese Funktion kann für In-Service-Provider-Umgebungen nützlich sein, in denen Skalierung und Erhaltung des IP-Speicherplatzes wichtig sind.
+
+
+
+
+
+
+== Speichereffizienz für Unternehmen
+
+Der NetApp Element Softwarecluster steigert die Gesamteffizienz und Leistung des Speichers.  Die folgenden Funktionen werden inline ausgeführt, sind immer aktiviert und erfordern keine manuelle Konfiguration durch den Benutzer:
+
+* *Deduplizierung.*  Das System speichert nur eindeutige 4K-Blöcke.  Alle doppelten 4K-Blöcke werden automatisch einer bereits gespeicherten Version der Daten zugeordnet.  Die Daten befinden sich auf Blocklaufwerken und werden mithilfe der Helix-Datensicherungssoftware von NetApp Element gespiegelt.  Dieses System reduziert den Kapazitätsverbrauch und die Schreibvorgänge innerhalb des Systems erheblich.
+* *Kompression.*  Die Komprimierung wird inline durchgeführt, bevor die Daten in den NVRAM geschrieben werden.  Daten werden komprimiert, in 4K-Blöcken gespeichert und bleiben im System komprimiert.  Diese Komprimierung reduziert den Kapazitätsverbrauch, die Schreibvorgänge und den Bandbreitenverbrauch im gesamten Cluster erheblich.
+* *Thin Provisioning.*  Diese Funktion stellt die richtige Speichermenge zum benötigten Zeitpunkt bereit und verhindert so den Kapazitätsverbrauch, der durch überdimensionierte oder nicht ausgelastete Volumes verursacht wird.
+* *Wendel.*  Die Metadaten für ein einzelnes Volume werden auf einem Metadatenlaufwerk gespeichert und zur Redundanz auf ein sekundäres Metadatenlaufwerk repliziert.
+
+
+
+NOTE: Element wurde für die Automatisierung entwickelt.  Alle Speicherfunktionen sind über APIs verfügbar.  Diese APIs sind die einzige Methode, die die Benutzeroberfläche zur Steuerung des Systems verwendet.

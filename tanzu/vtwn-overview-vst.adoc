@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: tanzu/vtwn-overview-vst.html 
+keywords: VMware Tanzu, Tanzu, Tanzu Kubernetes Grid Service, vSphere with Kubernetes, vSphere Pods, DevOps 
+summary:  
+---
+= Übersicht über VMware vSphere mit Tanzu
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit VMware vSphere mit Tanzu, auch bekannt als vSphere Pods, können Sie die ESXi-Hypervisorknoten in Ihrer VMware vSphere-Umgebung als Worker-Knoten in einer Bare-Metal-Kubernetes-Umgebung verwenden.
+
+image:vtwn-030.png["VMware vSphere mit Kubernetes"]
+
+Eine VMware vSphere-Umgebung mit Tanzu wird unter Workload Management genauso aktiviert wie ein nativer TKGS-Cluster.
+
+Ein virtualisierter Supervisor-Cluster wird erstellt, um eine hochverfügbare Steuerungsebene für Kubernetes bereitzustellen, und für jede Anwendung werden einzelne Namespaces erstellt, um die Ressourcenisolierung für Benutzer sicherzustellen.
+
+image:vtwn-029.png["Supervisor-Cluster"]
+
+Wenn VMware vSphere mit Tanzu aktiviert ist, ist auf jedem ESXi-Host die Spherelet-Anwendung installiert und konfiguriert.  Dadurch kann jeder Knoten als Worker in einer Kubernetes-Bereitstellung fungieren und die auf jedem Knoten bereitgestellten Pods verwalten.
+
+image:vtwn-028.png["Namensraum"]
+
+Derzeit unterstützen VMware vSphere mit Tanzu und vSphere Pods nur den lokalen vSphere CSI-Treiber.  Dies funktioniert, indem Administratoren im vSphere-Client Speicherrichtlinien erstellen, die aus den aktuell verfügbaren Speicherzielen auswählen, die als vSphere-Datenspeicher verwendet werden sollen.  Diese Richtlinien werden verwendet, um persistente Volumes für containerisierte Anwendungen zu erstellen.
+
+
+NOTE: Obwohl es derzeit keine Unterstützung für den NetApp Trident CSI-Treiber gibt, der eine direkte Verbindung zu externen ONTAP und Element-Speicher-Arrays ermöglicht, werden diese NetApp -Speichersysteme häufig zur Unterstützung des primären Speichers für die vSphere-Umgebung verwendet, und die erweiterten Datenverwaltungs- und Speichereffizienztools von NetApp können auf diese Weise verwendet werden.
+
+Wenn Sie mehr über VMware vSphere mit Tanzu erfahren möchten, lesen Sie die Dokumentationlink:https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-152BE7D2-E227-4DAA-B527-557B564D9718.html["hier,"^] .

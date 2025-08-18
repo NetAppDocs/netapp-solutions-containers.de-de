@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-adv-mgmt-create-resources.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, ONTAP, Trident, Red Hat OpenShift, Advanced Cluster Management, Advanced Cluster Management for Kubernetes 
+summary: Erweitertes Cluster-Management für Kubernetes auf Red Hat OpenShift mit NetApp 
+---
+= Erstellen von Ressourcen auf mehreren Clustern
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit Advanced Cluster Management für Kubernetes können Benutzer über die Konsole Ressourcen auf einem oder mehreren verwalteten Clustern gleichzeitig erstellen.  Wenn Sie beispielsweise OpenShift-Cluster an verschiedenen Standorten haben, die von verschiedenen NetApp ONTAP -Clustern unterstützt werden, und PVCs an beiden Standorten bereitstellen möchten, können Sie auf das (+)-Zeichen in der oberen Leiste klicken.  Wählen Sie dann die Cluster aus, auf denen Sie den PVC erstellen möchten, fügen Sie die YAML-Ressource ein und klicken Sie auf „Erstellen“.
+
+image:redhat-openshift-086.png["Erstellen von Ressourcen"]

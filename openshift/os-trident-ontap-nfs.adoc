@@ -1,0 +1,120 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-trident-ontap-nfs.html 
+keywords: Trident, Trident, ONTAP, AFF, FAS, NFS 
+summary: Um die Trident Integration mit dem NetApp ONTAP Speichersystem zu aktivieren, müssen Sie ein Backend erstellen, das die Kommunikation mit dem Speichersystem ermöglicht. 
+---
+= NetApp ONTAP NFS-Konfiguration
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um die Trident -Integration mit dem NetApp ONTAP Speichersystem zu ermöglichen, müssen Sie ein Backend erstellen, das die Kommunikation mit dem Speichersystem ermöglicht.
+
+. Im heruntergeladenen Installationsarchiv im `sample-input` Ordnerhierarchie.  Für NetApp ONTAP -Systeme, die NFS bedienen, kopieren Sie die `backend-ontap-nas.json` Datei in Ihr Arbeitsverzeichnis und bearbeiten Sie die Datei.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ cp sample-input/backends-samples/ontap-nas/backend-ontap-nas.json ./
+[netapp-user@rhel7 trident-installer]$ vi backend-ontap-nas.json
+----
+. Bearbeiten Sie die Werte „backendName“, „managementLIF“, „dataLIF“, „svm“, „username“ und „password“ in dieser Datei.
++
+[listing]
+----
+{
+    "version": 1,
+    "storageDriverName": "ontap-nas",
+    "backendName": "ontap-nas+10.61.181.221",
+    "managementLIF": "172.21.224.201",
+    "dataLIF": "10.61.181.221",
+    "svm": "trident_svm",
+    "username": "cluster-admin",
+    "password": "password"
+}
+----
++
+
+NOTE: Es empfiehlt sich, den benutzerdefinierten BackendName-Wert zur einfachen Identifizierung als Kombination aus StorageDriverName und DataLIF zu definieren, das NFS bereitstellt.
+
+. Führen Sie mit dieser Backend-Datei den folgenden Befehl aus, um Ihr erstes Backend zu erstellen.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ ./tridentctl -n trident create backend -f backend-ontap-nas.json
++-------------------------+----------------+--------------------------------------+--------+---------+
+|          NAME           | STORAGE DRIVER |                 UUID                 | STATE  | VOLUMES |
++-------------------------+----------------+--------------------------------------+--------+---------+
+| ontap-nas+10.61.181.221 | ontap-nas      | be7a619d-c81d-445c-b80c-5c87a73c5b1e | online |       0 |
++-------------------------+----------------+--------------------------------------+--------+---------+
+----
+. Nachdem das Backend erstellt wurde, müssen Sie als Nächstes eine Speicherklasse erstellen.  Genau wie beim Backend gibt es im Ordner „sample-inputs“ eine Beispiel-Speicherklassendatei, die für die Umgebung bearbeitet werden kann.  Kopieren Sie es in das Arbeitsverzeichnis und nehmen Sie die erforderlichen Änderungen vor, um das erstellte Backend widerzuspiegeln.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ cp sample-input/storage-class-samples/storage-class-csi.yaml.templ ./storage-class-basic.yaml
+[netapp-user@rhel7 trident-installer]$ vi storage-class-basic.yaml
+----
+. Die einzige Änderung, die an dieser Datei vorgenommen werden muss, ist die Definition der `backendType` Wert auf den Namen des Speichertreibers aus dem neu erstellten Backend.  Beachten Sie auch den Wert des Namensfelds, auf den in einem späteren Schritt verwiesen werden muss.
++
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: basic-csi
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-nas"
+----
++
+
+NOTE: Es gibt ein optionales Feld namens `fsType` das in dieser Datei definiert ist.  Diese Zeile kann in NFS-Backends gelöscht werden.
+
+. Führen Sie den `oc` Befehl zum Erstellen der Speicherklasse.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ oc create -f storage-class-basic.yaml
+storageclass.storage.k8s.io/basic-csi created
+----
+. Nachdem Sie die Speicherklasse erstellt haben, müssen Sie den ersten Persistent Volume Claim (PVC) erstellen.  Es gibt eine Probe `pvc-basic.yaml` Datei, die zum Ausführen dieser Aktion verwendet werden kann und sich ebenfalls in den Beispieleingaben befindet.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ cp sample-input/pvc-samples/pvc-basic.yaml ./
+[netapp-user@rhel7 trident-installer]$ vi pvc-basic.yaml
+----
+. Die einzige Änderung, die an dieser Datei vorgenommen werden muss, besteht darin, sicherzustellen, dass die `storageClassName` Das Feld entspricht dem gerade erstellten.  Die PVC-Definition kann je nach Bedarf der bereitzustellenden Arbeitslast weiter angepasst werden.
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: basic
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: basic-csi
+----
+. Erstellen Sie den PVC, indem Sie die `oc` Befehl.  Die Erstellung kann je nach Größe des zu erstellenden Sicherungsvolumes einige Zeit in Anspruch nehmen. Sie können den Vorgang daher während des Abschlusses verfolgen.
++
+[listing]
+----
+[netapp-user@rhel7 trident-installer]$ oc create -f pvc-basic.yaml
+persistentvolumeclaim/basic created
+
+[netapp-user@rhel7 trident-installer]$ oc get pvc
+NAME    STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+basic   Bound    pvc-b4370d37-0fa4-4c17-bd86-94f96c94b42d   1Gi        RWO            basic-csi      7s
+----
+

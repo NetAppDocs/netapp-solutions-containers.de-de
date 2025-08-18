@@ -1,0 +1,24 @@
+---
+sidebar: sidebar 
+permalink: anthos/anthos-load-balancers.html 
+keywords: Advanced Configuration, Load Balancers, F5, BigIP, SeeSaw 
+summary: In diesem Abschnitt geht es um die Erkundung von Load Balancer-Optionen für Benutzer, die ihre Anthos-Bereitstellung mit NetApp anpassen möchten. 
+---
+= Erkunden der Load Balancer-Optionen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eine in Anthos bereitgestellte Anwendung wird der Welt durch einen Dienst zugänglich gemacht, der von einem in der lokalen Anthos-Umgebung bereitgestellten Load Balancer bereitgestellt wird.
+
+Auf den folgenden Seiten finden Sie zusätzliche Informationen zu den in der Anthos-mit NetApp -Lösung validierten Load Balancer-Optionen:
+
+* link:anthos-f5bigip-lb.html["Installieren von F5 BIG-IP-Load Balancern"]
+* link:anthos-metallb.html["Installieren von MetalLB-Load Balancern"]
+* link:anthos-seesaw-lb.html["Installieren von SeeSaw-Load Balancern"]
+

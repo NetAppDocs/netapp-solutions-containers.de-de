@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-velero.html 
+keywords: data protection, DP, Velero, 3rd party tools 
+summary:  
+---
+= Datenschutz für Container-Apps und VMs mit Tools von Drittanbietern
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Diese Lösung zeigt, wie Velero, das in den OADP-Operator in der Red Hat OpenShift Container-Plattform integriert ist, verwendet wird, um Datenschutzvorgänge für Container und VMs durchzuführen.
+
+. Weitere Informationen zum Erstellen und Wiederherstellen einer Sicherung für Containeranwendungen in der OpenShift Container-Plattform finden Sie unterlink:https://docs.netapp.com/us-en/netapp-solutions-cloud/openshift/os-dp-velero-solution.html["hier,"^] .
+. Weitere Informationen zum Erstellen und Wiederherstellen aus einem Backup für VMs in OpenShift Virtualization, die auf der OpenShift Container-Plattform bereitgestellt werden, finden Sie unterlink:https://docs.netapp.com/us-en/netapp-solutions-virtualization/openshift/osv-vm-dp-using-velero-overview.html["hier,"^] .
+

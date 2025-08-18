@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: anthos/anthos-advanced-overview.html 
+keywords: Advanced Configuration, Load Balancers 
+summary: Dieser Abschnitt befasst sich mit Anpassungen, die reale Benutzer wahrscheinlich durchführen müssen, wenn sie diese Lösung in der Produktion einsetzen, wie etwa die Bereitstellung benutzerdefinierter Load Balancer-Instanzen. 
+---
+= Erweiterte Konfigurationsoptionen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Normalerweise ist die am einfachsten bereitzustellende Lösung die beste, in manchen Fällen sind jedoch erweiterte Anpassungen erforderlich, um die Anforderungen oder Spezifikationen einer bestimmten Anwendung oder der Umgebung zu erfüllen, in der die Lösung bereitgestellt wird.  Zu diesem Zweck ermöglicht die Red Hat OpenShift-Lösung mit NetApp die folgenden Anpassungen, um diese Anforderungen zu erfüllen.
+
+
+NOTE: In diesem Abschnitt haben wir einige erweiterte Konfigurationsoptionen dokumentiert, z. B. die Verwendung von Load Balancern von Drittanbietern oder das Erstellen eines privaten Registers zum Hosten benutzerdefinierter Container-Images. Beides sind Voraussetzungen für die Installation von NetApp Trident Protect.
+
+Auf den folgenden Seiten finden Sie zusätzliche Informationen zu den erweiterten Konfigurationsoptionen, die in der Red Hat OpenShift mit NetApp -Lösung validiert wurden:

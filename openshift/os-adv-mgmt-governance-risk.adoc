@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-adv-mgmt-governance-risk.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, ONTAP, Trident, Red Hat OpenShift, Advanced Cluster Management, Advanced Cluster Management for Kubernetes 
+summary: Erweitertes Cluster-Management für Kubernetes auf Red Hat OpenShift mit NetApp 
+---
+= Governance und Risiko
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit dieser Funktion können Sie die Compliance-Richtlinien für verschiedene Cluster definieren und sicherstellen, dass die Cluster diese einhalten.  Sie können die Richtlinien so konfigurieren, dass Abweichungen oder Verstöße gegen die Regeln entweder gemeldet oder behoben werden.
+
+. Navigieren Sie in der Seitenleiste zu „Governance und Risiko“.
+. Um Konformitätsrichtlinien zu erstellen, klicken Sie auf „Richtlinie erstellen“, geben Sie die Details der Richtlinienstandards ein und wählen Sie die Cluster aus, die dieser Richtlinie entsprechen sollen.  Wenn Sie Verstöße gegen diese Richtlinie automatisch beheben möchten, aktivieren Sie das Kontrollkästchen „Erzwingen, falls unterstützt“ und klicken Sie auf „Erstellen“.
++
+image:redhat-openshift-080.png["Erstellen einer Compliance-Richtlinie"]
+
+. Nachdem alle erforderlichen Richtlinien konfiguriert wurden, können alle Richtlinien- oder Clusterverletzungen über die erweiterte Clusterverwaltung überwacht und behoben werden.
++
+image:redhat-openshift-081.png["Richtlinienüberwachung"]
+
+

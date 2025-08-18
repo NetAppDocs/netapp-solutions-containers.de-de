@@ -1,0 +1,158 @@
+---
+sidebar: sidebar 
+permalink: tanzu/vtwn-solution-overview.html 
+keywords: VMware Tanzu, Tanzu, DevOps, Netapp, Trident, Trident Protect 
+summary: 'Dieses Referenzdokument bietet eine Bereitstellungsvalidierung verschiedener Varianten von VMware Tanzu Kubernetes-Lösungen, die entweder als Tanzu Kubernetes Grid (TKG), Tanzu Kubernetes Grid Service (TKGS) oder Tanzu Kubernetes Grid Integrated (TKGI) in mehreren verschiedenen Rechenzentrumsumgebungen bereitgestellt werden, wie von NetApp validiert.' 
+---
+= NVA-1166: VMware Tanzu mit NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Alan Cowles und Nikhil M Kulkarni, NetApp
+
+[role="lead"]
+Dieses Referenzdokument bietet eine Bereitstellungsvalidierung verschiedener Varianten von VMware Tanzu Kubernetes-Lösungen, die entweder als Tanzu Kubernetes Grid (TKG), Tanzu Kubernetes Grid Service (TKGS) oder Tanzu Kubernetes Grid Integrated (TKGI) in mehreren verschiedenen Rechenzentrumsumgebungen bereitgestellt werden, wie von NetApp validiert.  Außerdem wird die Speicherintegration mit NetApp Speichersystemen und dem Trident -Speicherorchestrator für die Verwaltung von persistentem Speicher sowie Trident Protect für die Sicherung und das Klonen der zustandsbehafteten Anwendungen unter Verwendung dieses persistenten Speichers beschrieben.  Abschließend enthält das Dokument Videodemonstrationen der Lösungsintegrationen und -validierungen.
+
+
+
+== Anwendungsfälle
+
+Die Lösung VMware Tanzu mit NetApp ist so konzipiert, dass sie Kunden mit den folgenden Anwendungsfällen einen außergewöhnlichen Mehrwert bietet:
+
+* Einfach bereitzustellende und zu verwaltende VMware Tanzu Kubernetes Grid-Angebote, die auf VMware vSphere bereitgestellt und in NetApp -Speichersysteme integriert sind.
+* Die kombinierte Leistung von Enterprise-Containern und virtualisierten Workloads mit VMware Tanzu Kubernetes Grid-Angeboten.
+* Reale Konfigurationen und Anwendungsfälle, die die Funktionen von VMware Tanzu bei Verwendung mit NetApp -Speicher und der NetApp Trident -Produktsuite hervorheben.
+* Anwendungskonsistenter Schutz oder Migration von containerisierten Workloads, die auf VMware Tanzu Kubernetes Grid-Clustern bereitgestellt werden, deren Daten sich auf NetApp -Speichersystemen befinden, mithilfe von Trident Protect.
+
+
+
+
+== Geschäftswert
+
+Unternehmen wenden zunehmend DevOps-Praktiken an, um neue Produkte zu entwickeln, Release-Zyklen zu verkürzen und schnell neue Funktionen hinzuzufügen.  Aufgrund ihrer von Natur aus agilen Natur spielen Container und Microservices eine entscheidende Rolle bei der Unterstützung von DevOps-Praktiken.  Die Umsetzung von DevOps im Produktionsmaßstab in einer Unternehmensumgebung bringt jedoch eigene Herausforderungen mit sich und stellt bestimmte Anforderungen an die zugrunde liegende Infrastruktur, beispielsweise die folgenden:
+
+* Hohe Verfügbarkeit auf allen Ebenen des Stacks
+* Einfache Bereitstellungsverfahren
+* Unterbrechungsfreier Betrieb und Upgrades
+* API-gesteuerte und programmierbare Infrastruktur, um mit der Agilität von Microservices Schritt zu halten
+* Mandantenfähigkeit mit Leistungsgarantien
+* Möglichkeit, virtualisierte und containerisierte Workloads gleichzeitig auszuführen
+* Möglichkeit, die Infrastruktur unabhängig von den Arbeitslastanforderungen zu skalieren
+* Möglichkeit zur Bereitstellung in einem Hybrid-Cloud-Modell mit Containern, die sowohl in lokalen Rechenzentren als auch in der Cloud ausgeführt werden.
+
+
+VMware Tanzu mit NetApp berücksichtigt diese Herausforderungen und bietet eine Lösung, die bei der Bewältigung aller Probleme hilft, indem VMware Tanzu Kubernetes-Angebote in der vom Kunden gewählten Hybrid-Cloud-Umgebung bereitgestellt werden.
+
+
+
+== Technologieübersicht
+
+Die VMware Tanzu mit NetApp -Lösung besteht aus den folgenden Hauptkomponenten:
+
+
+
+=== VMware Tanzu Kubernetes-Plattformen
+
+VMware Tanzu ist in verschiedenen Varianten erhältlich, die das Solutions Engineering-Team bei NetApp in unseren Laboren validiert hat.  Jede Tanzu-Version lässt sich erfolgreich in das NetApp Speicherportfolio integrieren und kann dazu beitragen, bestimmte Infrastrukturanforderungen zu erfüllen.  Die folgenden Aufzählungspunkte beschreiben die Funktionen und Angebote jeder in diesem Dokument beschriebenen Version von Tanzu.
+
+*VMware Tanzu Kubernetes Grid (TKG)*
+
+* Standardmäßige Upstream-Kubernetes-Umgebung, bereitgestellt in einer VMware vSphere-Umgebung.
+* Früher bekannt als Essential PKS (aus der Heptio-Akquisition, Februar 2019).
+* TKG wird mit einer separaten Management-Cluster-Instanz zur Unterstützung ab vSphere 6.7U3 bereitgestellt.
+* TKG-Bereitstellungen können auch in der Cloud mit AWS oder Azure bereitgestellt werden.
+* Ermöglicht die Verwendung von Windows- oder Linux-Workerknoten (Ubuntu/Photon).
+* Für die Steuerebene können NSX-T, HA Proxy, AVI-Netzwerke oder Lastenausgleichsmodule verwendet werden.
+* TKG unterstützt MetalLB für die Anwendungs-/Datenebene.
+* Kann vSphere CSI sowie CSIs von Drittanbietern wie NetApp Trident verwenden.
+
+
+*VMware Tanzu Kubernetes Grid Service (TKGS)*
+
+* Standardmäßige Upstream-Kubernetes-Umgebung, bereitgestellt in einer VMware vSphere-Umgebung.
+* Früher bekannt als Essential PKS (aus der Heptio-Akquisition, Februar 2019).
+* TKGS wird nur mit Supervisor-Cluster und Workload-Clustern ab vSphere 7.0U1 bereitgestellt.
+* Ermöglicht die Verwendung von Windows- oder Linux-Workerknoten (Ubuntu/Photon).
+* Für die Steuerebene können NSX-T, HA Proxy, AVI-Netzwerke oder Lastenausgleichsmodule verwendet werden.
+* TKGS unterstützt MetalLB für die Anwendungs-/Datenebene.
+* Kann vSphere CSI sowie CSIs von Drittanbietern wie NetApp Trident verwenden.
+* Bietet Unterstützung für vSphere Pods mit Tanzu, sodass Pods direkt auf aktivierten ESXi-Hosts in der Umgebung ausgeführt werden können.
+
+
+*VMWare Tanzu Kubernetes Grid Integrated (TKGI)*
+
+* Früher bekannt als Enterprise PKS (aus der Heptio-Akquisition, Februar 2019).
+* Kann NSX-T, HA Proxy oder Avi verwenden.  Sie können auch Ihren eigenen Load Balancer bereitstellen.
+* Unterstützt ab vSphere 6.7U3 sowie AWS, Azure und GCP.
+* Die Einrichtung erfolgt über einen Assistenten, um eine einfache Bereitstellung zu ermöglichen.
+* Führt Tanzu in kontrollierten, unveränderlichen VMs aus, die von BOSH verwaltet werden.
+* Kann vSphere CSI sowie CSIs von Drittanbietern wie NetApp Trident verwenden (es gelten einige Bedingungen).
+
+
+*vSphere mit Tanzu (vSphere Pods)*
+
+* vSphere-native Pods werden in einer dünnen, photonenbasierten Schicht mit vorgeschriebener virtueller Hardware zur vollständigen Isolierung ausgeführt.
+* Erfordert NSX-T, ermöglicht aber zusätzliche Funktionsunterstützung wie z. B. ein Harbor-Image-Register.
+* Bereitstellung und Verwaltung in vSphere 7.0U1 und höher mithilfe eines virtuellen Supervisor-Clusters wie TKGS.  Führt Pods direkt auf ESXi-Knoten aus.
+* Vollständig in vSphere integriert, höchste Transparenz und Kontrolle durch die vSphere-Administration.
+* Isolierte CRX-basierte Pods für höchste Sicherheit.
+* Unterstützt nur vSphere CSI für persistenten Speicher.  Es werden keine Speicher-Orchestratoren von Drittanbietern unterstützt.
+
+
+
+
+=== NetApp Speichersysteme
+
+NetApp verfügt über mehrere Speichersysteme, die sich perfekt für Unternehmensrechenzentren und Hybrid-Cloud-Bereitstellungen eignen.  Das NetApp Portfolio umfasst die Speichersysteme NetApp ONTAP, NetApp Element und NetApp e-Series, die alle persistenten Speicher für containerisierte Anwendungen bereitstellen können.
+
+Weitere Informationen finden Sie auf der NetApp -Website https://www.netapp.com["hier,"] .
+
+
+
+=== NetApp Storage-Integrationen
+
+Trident ist ein Open-Source-Speicherorchestrator mit vollem Support für Container und Kubernetes-Distributionen, einschließlich VMware Tanzu.
+
+Weitere Informationen finden Sie auf der Trident -Website https://docs.netapp.com/us-en/trident/index.html["hier,"] .
+
+
+
+== Aktuelle Support-Matrix für validierte Releases
+
+|===
+
+
+| Technologie | Zweck | Softwareversion 
+
+
+| NetApp ONTAP | Storage | 9.9.1 
+
+
+| NetApp Trident | Speicherorchestrierung | 22.04.0 
+
+
+| VMware Tanzu Kubernetes Grid | Container-Orchestrierung | 1.4+ 
+
+
+.2+| VMware Tanzu Kubernetes Grid-Dienst .2+| Container-Orchestrierung | 0.0.15 [vSphere-Namespaces] 
+
+
+| 1.22.6 [Supervisor-Cluster Kubernetes] 
+
+
+| VMware Tanzu Kubernetes Grid integriert | Container-Orchestrierung | 1.13.3 
+
+
+| VMware vSphere | Rechenzentrumsvirtualisierung | 7.0U3 
+
+
+| VMware NSX-T Rechenzentrum | Netzwerk und Sicherheit | 3.1.3 
+
+
+| VMware NSX Advanced Load Balancer | Lastenausgleich | 20.1.3 
+|===

@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: anthos/anthos-trident-overview.html 
+keywords: Trident, Trident, Helm, Operator, iSCSI, NFS 
+summary: Trident ist ein vollständig unterstützter Open-Source-Speicherorchestrator für Container und Kubernetes-Distributionen, einschließlich Anthos. 
+---
+= Trident Übersicht
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident ist ein vollständig unterstützter Open-Source-Speicherorchestrator für Container und Kubernetes-Distributionen, einschließlich Anthos.  Trident funktioniert mit dem gesamten NetApp Speicherportfolio, einschließlich NetApp ONTAP, und unterstützt auch NFS- und iSCSI-Verbindungen.  Trident beschleunigt den DevOps-Workflow, indem es Endbenutzern ermöglicht, Speicher von ihren NetApp -Speichersystemen bereitzustellen und zu verwalten, ohne dass ein Speicheradministrator eingreifen muss.
+
+Ein Administrator kann basierend auf den Projektanforderungen und Speichersystemmodellen eine Reihe von Speicher-Backends konfigurieren, die erweiterte Speicherfunktionen ermöglichen, darunter Komprimierung, bestimmte Datenträgertypen und QoS-Stufen, die ein bestimmtes Leistungsniveau garantieren.  Nachdem sie definiert wurden, können diese Backends von Entwicklern in ihren Projekten verwendet werden, um Persistent Volume Claims (PVCs) zu erstellen und bei Bedarf persistenten Speicher an ihre Container anzuhängen.
+
+image:a-w-n-astra-trident.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+
+Trident hat einen schnellen Entwicklungszyklus und wird wie Kubernetes viermal im Jahr veröffentlicht.
+
+Die Dokumentation zur neuesten Version von Trident finden Sie https://docs.netapp.com/us-en/trident/index.html["hier,"] .  Eine Support-Matrix, welche Version von Trident mit welcher Kubernetes-Distribution getestet wurde, finden Sie https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html#supported-frontends-orchestrators["hier,"] .
+
+Ab der Version 20.04 wird die Trident -Einrichtung vom Trident -Operator durchgeführt.  Der Operator erleichtert groß angelegte Bereitstellungen und bietet zusätzliche Unterstützung, einschließlich Selbstheilung für Pods, die als Teil der Trident -Installation bereitgestellt werden.
+
+Mit der Version 22.04 wurde ein Helm-Diagramm zur Verfügung gestellt, um die Installation des Trident Operators zu vereinfachen.
+
+Einzelheiten zur Installation von Trident finden Sie unter https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html["hier,"] .
+
+
+
+== Erstellen Sie ein Speichersystem-Backend
+
+Nach Abschluss der Trident Operator-Installation müssen Sie das Backend für die von Ihnen verwendete NetApp -Speicherplattform konfigurieren.  Folgen Sie dem unten stehenden Link, um mit der Einrichtung und Konfiguration von Trident fortzufahren.link:https://docs.netapp.com/us-en/trident/trident-use/backends.html["Erstellen Sie ein Backend."]
+
+
+
+== Erstellen einer Speicherklasse
+
+Nachdem Sie das Backend erstellt haben, müssen Sie eine Speicherklasse erstellen, die Kubernetes-Benutzer angeben, wenn sie ein Volume wünschen.  Kubernetes-Benutzer stellen Volumes bereit, indem sie Persistent Volume Claims (PVCs) verwenden, die eine Speicherklasse namentlich angeben.  Folgen Sie dem unten stehenden Link, um eine Speicherklasse zu erstellen.link:https://docs.netapp.com/us-en/trident/trident-use/create-stor-class.html["Erstellen einer Speicherklasse"]
+
+
+
+== Dynamisches Bereitstellen eines Volumes
+
+Sie müssen mithilfe der Speicherklasse ein Kubernetes Persistent Volume Claim (PVC)-Objekt erstellen, um ein Volume dynamisch bereitzustellen.  Folgen Sie dem unten stehenden Link, um ein PVC-Objekt zu erstellen.link:https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["Erstellen eines PVC"]
+
+
+
+== Verwenden Sie die Lautstärke
+
+Das im obigen Schritt bereitgestellte Volume kann von einer Anwendung verwendet werden, indem das Volume im Pod gemountet wird. Der folgende Link zeigt ein Beispiel.link:https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html#sample-manifests["Montieren Sie das Volume in einem Pod"]
+
+
+
+== Beispielbereitstellung
+
+link:anthos-trident-ontap-iscsi.html["Beispielmanifeste für das iSCSI-Protokoll, window=_blank"]
+
+link:anthos-trident-ontap-nfs.html["Beispielmanifeste für das NFS-Protokoll, Fenster=_leer"]
