@@ -98,7 +98,7 @@ Die Verteilung der OpenShift-Master auf mehrere Hypervisor-Knoten kann durch die
 
 Affinität oder Anti-Affinität ist eine Möglichkeit, Regeln für eine Reihe von VMs und/oder Hosts zu definieren, die bestimmen, ob die VMs zusammen auf demselben Host oder denselben Hosts in der Gruppe oder auf verschiedenen Hosts ausgeführt werden.  Es wird auf VMs angewendet, indem Affinitätsgruppen erstellt werden, die aus VMs und/oder Hosts mit einem Satz identischer Parameter und Bedingungen bestehen.  Abhängig davon, ob die VMs in einer Affinitätsgruppe auf demselben Host oder denselben Hosts in der Gruppe oder separat auf verschiedenen Hosts ausgeführt werden, können die Parameter der Affinitätsgruppe entweder eine positive oder eine negative Affinität definieren.
 
-Informationen zum Konfigurieren von Affinitätsgruppen finden Sie imlink:https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-FF28F29C-8B67-4EFF-A2EF-63B3537E6934.html["vSphere 6.7-Dokumentation: Verwenden von DRS-Affinitätsregeln"^] .
+Informationen zum Konfigurieren von Affinitätsgruppen finden Sie unter link:https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/vsphere-resource-management/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html["vSphere 9.0-Dokumentation: Verwenden von DRS-Affinitätsregeln"^]Die
 
 
 
