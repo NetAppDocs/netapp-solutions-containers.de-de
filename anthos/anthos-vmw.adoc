@@ -74,8 +74,6 @@ Anthos-Cluster auf VMware können je nach Wahl des Kunden sowohl in vSphere 7- a
 Die folgende Tabelle enthält eine Liste der vSphere-Versionen, die von NetApp und unseren Partnern zur Validierung der Lösung verwendet wurden.
 
 |===
-
-
 | Betriebssystem | Freigeben | Anthos-Versionen 
 
 
@@ -108,8 +106,6 @@ Die folgende Tabelle enthält Informationen zu diesen zusätzlichen Infrastruktu
 Die folgende Tabelle enthält eine Liste der in der Validierungsumgebung eingesetzten Softwareversionen.
 
 |===
-
-
 | Hersteller | Softwarename | Version 
 
 
@@ -156,7 +152,7 @@ Affinität oder Anti-Affinität ist eine Möglichkeit, Regeln für eine Reihe vo
 
 Informationen zum Konfigurieren von Affinitätsgruppen finden Sie unter dem entsprechenden Link unten für Ihre Version von VMware vSphere.
 
-https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/vsphere-resource-management/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html["vSphere 9.0-Dokumentation: Verwenden von DRS-Affinitätsregeln"^]. hhttps://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-resource-management/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html[vSphere 7.0 Dokumentation: Verwendung von DRS-Affinitätsregeln^].
+https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/vsphere-resource-management/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html["vSphere 9.0-Dokumentation: Verwenden von DRS-Affinitätsregeln"^]. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-resource-management/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html["vSphere 7.0 Dokumentation: Verwendung von DRS-Affinitätsregeln"^].
 
 
 NOTE: Anthos verfügt über eine Konfigurationsoption in jedem einzelnen `cluster.yaml` Datei, um automatisch Knotenaffinitätsregeln zu erstellen, die basierend auf der Anzahl der ESXi-Hosts in Ihrer Umgebung aktiviert oder deaktiviert werden können.
