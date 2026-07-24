@@ -18,12 +18,14 @@ Auf dieser Seite finden Sie die Installations- und Konfigurationsanweisungen fü
 
 
 
+[[installing-the-metallb-load-balancer]]
 == Installieren des MetalLB Load Balancers
 
 Der MetalLB-Load Balancer ist vollständig in Anthos-Cluster auf VMware integriert und verfügt ab der Version 1.11 über eine automatische Bereitstellung als Teil der Admin- und Benutzercluster-Setups.  Es gibt Textblöcke in den jeweiligen `cluster.yaml` Konfigurationsdateien, die Sie ändern müssen, um Informationen zum Lastenausgleich bereitzustellen.  Es wird auf Ihrem Anthos-Cluster selbst gehostet, anstatt wie bei den anderen unterstützten Load Balancer-Lösungen die Bereitstellung externer Ressourcen zu erfordern.  Außerdem können Sie einen IP-Pool erstellen, der bei der Erstellung von Kubernetes-Diensten vom Typ „Load Balancer“ in Clustern, die nicht auf einem Cloud-Anbieter ausgeführt werden, automatisch Adressen zuweist.
 
 
 
+[[integration-with-anthos]]
 == Integration mit Anthos
 
 Wenn Sie den MetalLB-Load Balancer für Anthos Admin aktivieren, müssen Sie einige Zeilen in der `loadBalancer:` Abschnitt, der in der `admin-cluster.yaml` Datei.  Die einzigen Werte, die Sie ändern müssen, sind die Einstellung `controlPlaneVIP:` Adresse und stellen Sie dann die `kind:` als MetalLB.  Ein Beispiel finden Sie im folgenden Codeausschnitt:

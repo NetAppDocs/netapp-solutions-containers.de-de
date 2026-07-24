@@ -29,6 +29,7 @@ image:a-w-n-anthos-controlplanev2-vm-architecture.png["Abbildung, die einen Eing
 
 
 
+[[benefits]]
 == Vorteile
 
 Anthos-Cluster auf VMware bieten die folgenden Vorteile:
@@ -41,6 +42,7 @@ Anthos-Cluster auf VMware bieten die folgenden Vorteile:
 
 
 
+[[vmware-vsphere]]
 == VMware vSphere
 
 VMware vSphere ist eine Virtualisierungsplattform zur zentralen Verwaltung einer großen Anzahl virtualisierter Server und Netzwerke, die auf dem ESXi-Hypervisor laufen.
@@ -57,16 +59,19 @@ VMware vSphere bietet die folgenden Funktionen:
 
 
 
+[[hardware-requirements]]
 == Hardwareanforderungen
 
 
 
+[[compute]]
 === Berechnen
 
 Google Cloud fordert über sein Anthos Ready-Plattformpartnerprogramm regelmäßig eine aktualisierte Validierung von Partnerserverplattformen mit neuen Versionen von Anthos an.  Eine Liste der aktuell validierten Serverplattformen und der unterstützten Anthos-Versionen finden Sie https://cloud.google.com/anthos/docs/resources/partner-platforms["hier,"^] .
 
 
 
+[[operating-system]]
 === Betriebssystem
 
 Anthos-Cluster auf VMware können je nach Wahl des Kunden sowohl in vSphere 7- als auch in vSphere 8-Umgebungen bereitgestellt werden, um die Anpassung an die aktuelle Rechenzentrumsinfrastruktur zu erleichtern.
@@ -81,6 +86,7 @@ Die folgende Tabelle enthält eine Liste der vSphere-Versionen, die von NetApp u
 |===
 
 
+[[additional-hardware]]
 === Zusätzliche Hardware
 
 Um die Bereitstellung von Anthos mit NetApp als vollständig validierte Lösung abzuschließen, wurden zusätzliche Rechenzentrumskomponenten für Netzwerk und Speicher von NetApp und unseren Partneringenieuren getestet.
@@ -101,6 +107,7 @@ Die folgende Tabelle enthält Informationen zu diesen zusätzlichen Infrastruktu
 |===
 
 
+[[additional-software]]
 === Zusätzliche Software
 
 Die folgende Tabelle enthält eine Liste der in der Validierungsumgebung eingesetzten Softwareversionen.
@@ -120,6 +127,7 @@ image:a-w-n-anthos-128-vsphere8-validation.png["Abbildung, die einen Eingabe-/Au
 
 
 
+[[network-infrastructure-support-resources]]
 === Ressourcen zur Unterstützung der Netzwerkinfrastruktur
 
 Vor der Bereitstellung von Anthos sollte die folgende Infrastruktur vorhanden sein:
@@ -132,18 +140,21 @@ Vor der Bereitstellung von Anthos sollte die folgende Infrastruktur vorhanden se
 
 
 
+[[best-practices-for-production-deployments]]
 == Best Practices für Produktionsbereitstellungen
 
 In diesem Abschnitt werden mehrere bewährte Methoden aufgeführt, die ein Unternehmen berücksichtigen sollte, bevor es diese Lösung in der Produktion einsetzt.
 
 
 
+[[deploy-anthos-to-an-esxi-cluster-of-at-least-three-nodes]]
 === Stellen Sie Anthos auf einem ESXi-Cluster mit mindestens drei Knoten bereit
 
 Obwohl es möglich ist, Anthos zu Demonstrations- oder Evaluierungszwecken in einem vSphere-Cluster mit weniger als drei Knoten zu installieren, wird dies für Produktions-Workloads nicht empfohlen.  Obwohl zwei Knoten grundlegende Hochverfügbarkeit und Fehlertoleranz ermöglichen, muss eine Anthos-Clusterkonfiguration geändert werden, um die Standard-Hostaffinität zu deaktivieren. Diese Bereitstellungsmethode wird von Google Cloud nicht unterstützt.
 
 
 
+[[configure-virtual-machine-and-host-affinity]]
 === Konfigurieren der virtuellen Maschine und der Hostaffinität
 
 Die Verteilung von Anthos-Clusterknoten auf mehrere Hypervisor-Knoten kann durch die Aktivierung der VM- und Host-Affinität erreicht werden.

@@ -18,12 +18,14 @@ Entdecken Sie die wichtigsten Funktionen und Bereitstellungsszenarien für NetAp
 
 
 
+[[anthos-deployment-and-setup-on-bare-metal]]
 == Anthos-Bereitstellung und -Einrichtung auf Bare Metal
 
 .Anthos auf Bare Metal bereitstellen – Anthos mit NetApp
 video::a9e5fd88-6bdc-4d23-a4b5-b01200effc06[panopto,width=360]
 
 
+[[trident-deployment-and-setup-on-anthos]]
 == Bereitstellung und Einrichtung von Trident auf Anthos
 
 .Trident auf Anthos 1.14-Cluster bereitstellen

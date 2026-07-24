@@ -18,6 +18,7 @@ Dieser Abschnitt behandelt die erweiterte Clusterverwaltung für Kubernetes auf 
 
 
 
+[[prerequisites]]
 == Voraussetzungen
 
 . Ein Red Hat OpenShift-Cluster (höher als Version 4.5) für den Hub-Cluster

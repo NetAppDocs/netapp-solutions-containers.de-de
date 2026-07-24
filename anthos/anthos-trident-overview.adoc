@@ -32,30 +32,35 @@ Einzelheiten zur Installation von Trident finden Sie unter https://docs.netapp.c
 
 
 
+[[create-a-storage-system-backend]]
 == Erstellen Sie ein Speichersystem-Backend
 
 Nach Abschluss der Trident Operator-Installation müssen Sie das Backend für die von Ihnen verwendete NetApp -Speicherplattform konfigurieren.  Folgen Sie dem unten stehenden Link, um mit der Einrichtung und Konfiguration von Trident fortzufahren.link:https://docs.netapp.com/us-en/trident/trident-use/backends.html["Erstellen Sie ein Backend."]
 
 
 
+[[create-a-storage-class]]
 == Erstellen einer Speicherklasse
 
 Nachdem Sie das Backend erstellt haben, müssen Sie eine Speicherklasse erstellen, die Kubernetes-Benutzer angeben, wenn sie ein Volume wünschen.  Kubernetes-Benutzer stellen Volumes bereit, indem sie Persistent Volume Claims (PVCs) verwenden, die eine Speicherklasse namentlich angeben.  Folgen Sie dem unten stehenden Link, um eine Speicherklasse zu erstellen.link:https://docs.netapp.com/us-en/trident/trident-use/create-stor-class.html["Erstellen einer Speicherklasse"]
 
 
 
+[[dynamically-provision-a-volume]]
 == Dynamisches Bereitstellen eines Volumes
 
 Sie müssen mithilfe der Speicherklasse ein Kubernetes Persistent Volume Claim (PVC)-Objekt erstellen, um ein Volume dynamisch bereitzustellen.  Folgen Sie dem unten stehenden Link, um ein PVC-Objekt zu erstellen.link:https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["Erstellen eines PVC"]
 
 
 
+[[use-the-volume]]
 == Verwenden Sie die Lautstärke
 
 Das im obigen Schritt bereitgestellte Volume kann von einer Anwendung verwendet werden, indem das Volume im Pod gemountet wird. Der folgende Link zeigt ein Beispiel.link:https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html#sample-manifests["Montieren Sie das Volume in einem Pod"]
 
 
 
+[[sample-provisioning]]
 == Beispielbereitstellung
 
 link:anthos-trident-ontap-iscsi.html["Beispielmanifeste für das iSCSI-Protokoll, window=_blank"]

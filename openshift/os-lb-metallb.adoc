@@ -20,6 +20,7 @@ MetalLB ist ein selbstgehosteter Netzwerk-Load Balancer, der auf Ihrem OpenShift
 
 
 
+[[metallb-configuration-options]]
 == MetalLB-Konfigurationsoptionen
 
 Basierend darauf, wie MetalLB die den LoadBalancer-Diensten außerhalb des OpenShift-Clusters zugewiesene IP-Adresse ankündigt, arbeitet es in zwei Modi:
@@ -33,6 +34,7 @@ NOTE: Für die Zwecke dieses Dokuments konfigurieren wir MetalLB im Layer-2-Modu
 
 
 
+[[installing-the-metallb-load-balancer]]
 == Installieren des MetalLB Load Balancers
 
 . Laden Sie die MetalLB-Ressourcen herunter.

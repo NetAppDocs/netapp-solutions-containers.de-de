@@ -15,12 +15,14 @@ summary: Red Hat OpenShift Service auf AWS mit NetApp ONTAP
 
 
 
+[[overview]]
 == Überblick
 
 In diesem Abschnitt zeigen wir, wie FSx für ONTAP als persistente Speicherschicht für auf ROSA ausgeführte Anwendungen genutzt wird.  Es wird die Installation des NetApp Trident CSI-Treibers auf einem ROSA-Cluster, die Bereitstellung eines FSx für ONTAP -Dateisystems und die Bereitstellung einer Beispielanwendung mit Status gezeigt.  Außerdem werden Strategien zum Sichern und Wiederherstellen Ihrer Anwendungsdaten gezeigt.  Mit dieser integrierten Lösung können Sie ein gemeinsam genutztes Speicherframework einrichten, das sich mühelos über AZs skalieren lässt und die Prozesse der Skalierung, des Schutzes und der Wiederherstellung Ihrer Daten mithilfe des Trident CSI-Treibers vereinfacht.
 
 
 
+[[prerequisites]]
 == Voraussetzungen
 
 * link:https://signin.aws.amazon.com/signin?redirect_uri=https://portal.aws.amazon.com/billing/signup/resume&client_id=signup["AWS-Konto"]
@@ -40,6 +42,7 @@ image:redhat-openshift-container-rosa-001.png["Rosa Architektur"]
 
 
 
+[[initial-setup]]
 == Ersteinrichtung
 
 **1.  Bereitstellung von FSx für NetApp ONTAP**

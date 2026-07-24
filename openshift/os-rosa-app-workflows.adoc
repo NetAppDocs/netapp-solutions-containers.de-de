@@ -18,6 +18,7 @@ In diesem Dokument wird beschrieben, wie Sie NetApp ONTAP mit dem Red Hat OpenSh
 
 
 
+[[create-volume-snapshot]]
 == Volume-Snapshot erstellen
 
 **1.  Erstellen Sie einen Snapshot des App-Volumes**. In diesem Abschnitt zeigen wir, wie Sie einen Trident-Snapshot des mit der App verknüpften Volumes erstellen. Dies ist eine zeitpunktbezogene Kopie der App-Daten.  Wenn die Anwendungsdaten verloren gehen, können wir die Daten aus dieser Point-in-Time-Kopie wiederherstellen.  HINWEIS: Dieser Snapshot wird im selben Aggregat wie das Originalvolume in ONTAP(vor Ort oder in der Cloud) gespeichert.  Wenn also das ONTAP Speicheraggregat verloren geht, können wir die App-Daten nicht aus seinem Snapshot wiederherstellen.
@@ -64,6 +65,7 @@ image:redhat-openshift-container-rosa-023.png["Datenbank löschen"]
 
 
 
+[[restore-from-volume-snapshot]]
 == Wiederherstellen aus Volume-Snapshot
 
 **1.  Wiederherstellen aus Snapshot** In diesem Abschnitt zeigen wir, wie Sie eine Anwendung aus dem Trident-Snapshot des App-Volumes wiederherstellen.
@@ -122,6 +124,7 @@ image:redhat-openshift-container-rosa-030.png["Datenbank wiederhergestellt"]
 
 
 
+[[demo-video]]
 == Demo-Video
 
 .Amazon FSx for NetApp ONTAP mit Red Hat OpenShift Service auf AWS unter Verwendung der gehosteten Steuerebene

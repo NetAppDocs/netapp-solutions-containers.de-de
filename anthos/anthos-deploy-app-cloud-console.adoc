@@ -18,6 +18,7 @@ In diesem Abschnitt wird detailliert beschrieben, wie Sie mithilfe der Google Cl
 
 
 
+[[prerequisites]]
 == Voraussetzungen
 
 * Ein vor Ort bereitgestellter und bei der Google Cloud Console registrierter Anthos-Cluster
@@ -28,6 +29,7 @@ In diesem Abschnitt wird detailliert beschrieben, wie Sie mithilfe der Google Cl
 
 
 
+[[deploying-an-application]]
 == Bereitstellen einer Anwendung
 
 Für diesen Anwendungsfall stellen wir mithilfe der Google Cloud Console eine einfache WordPress-Anwendung auf einem unserer Anthos-Cluster bereit.  Die Bereitstellung verwendet persistenten Speicher, der von NetApp ONTAP in einer vordefinierten Speicherklasse bereitgestellt wird.  Anschließend demonstrieren wir zwei verschiedene Methoden zum Ändern des Standarddienstes der Anwendung, sodass der MetalLB-Lastenausgleich ihr eine IP-Adresse zuweist und sie der Welt zugänglich macht.
@@ -78,12 +80,14 @@ image:a-w-n-use-case-deploy-app-003.png["Anwendung läuft"]
 
 
 
+[[exposing-the-application]]
 == Verfügbarmachen der Anwendung
 
 Nachdem die Anwendung bereitgestellt wurde, haben Sie zwei Möglichkeiten, ihr eine weltweit erreichbare IP zuzuweisen.
 
 
 
+[[using-the-google-cloud-console]]
 === Verwenden der Google Cloud Console
 
 Sie können die Anwendung verfügbar machen, indem Sie die Google Cloud Console verwenden und die YAML-Ausgabe für die Dienste in einem Browser bearbeiten, um eine öffentlich erreichbare IP festzulegen.  Führen Sie dazu die folgenden Schritte aus:
@@ -111,6 +115,7 @@ image:a-w-n-use-case-deploy-app-015.png["Servicedetails endgültig"]
 
 
 
+[[patching-the-service-with-kubectl]]
 === Patchen des Dienstes mit Kubectl
 
 Sie können die Anwendung mithilfe der CLI und der `kubectl patch` Befehl, um Ihre Bereitstellung zu ändern und eine öffentlich erreichbare IP festzulegen. Führen Sie dazu die folgenden Schritte aus:
@@ -135,6 +140,7 @@ image:a-w-n-use-case-deploy-app-001.png["Patch-Dienst zum Typ LoadBalancer"]
 
 
 
+[[visit-the-application-at-the-exposed-external-ip]]
 == Besuchen Sie die Anwendung unter der freigegebenen externen IP
 
 Nachdem Sie die Anwendung nun mit einer öffentlich erreichbaren IP-Adresse verfügbar gemacht haben, können Sie Ihre WordPress-Instanz über einen Browser aufrufen.

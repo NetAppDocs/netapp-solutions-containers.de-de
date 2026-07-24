@@ -22,6 +22,7 @@ Weitere Informationen zu NetApp Element -Speichersystemen finden Sie auf der htt
 
 
 
+[[iscsi-login-redirection-and-self-healing-capabilities]]
 == iSCSI-Anmeldeumleitung und Selbstheilungsfunktionen
 
 Die NetApp Element -Software nutzt das iSCSI-Speicherprotokoll, eine Standardmethode zum Kapseln von SCSI-Befehlen in einem herkömmlichen TCP/IP-Netzwerk.  Wenn sich die SCSI-Standards ändern oder die Leistung von Ethernet-Netzwerken verbessert wird, profitiert das iSCSI-Speicherprotokoll, ohne dass Änderungen erforderlich sind.
@@ -34,6 +35,7 @@ Auf diese Weise hat eine auf einen Knotenausfall folgende Neuverteilung des Volu
 
 
 
+[[netapp-element-software-cluster-qos]]
 == NetApp Element Softwarecluster QoS
 
 Ein NetApp Element -Softwarecluster ermöglicht die dynamische Konfiguration von QoS auf Volume-Basis.  Sie können QoS-Einstellungen pro Volume verwenden, um die Speicherleistung basierend auf den von Ihnen definierten SLAs zu steuern.  Die folgenden drei konfigurierbaren Parameter definieren die QoS:
@@ -45,6 +47,7 @@ Ein NetApp Element -Softwarecluster ermöglicht die dynamische Konfiguration von
 
 
 
+[[multitenancy]]
 == Mandantenfähigkeit
 
 Sichere Mandantenfähigkeit wird durch die folgenden Funktionen erreicht:
@@ -62,6 +65,7 @@ Sichere Mandantenfähigkeit wird durch die folgenden Funktionen erreicht:
 
 
 
+[[enterprise-storage-efficiencies]]
 == Speichereffizienz für Unternehmen
 
 Der NetApp Element Softwarecluster steigert die Gesamteffizienz und Leistung des Speichers.  Die folgenden Funktionen werden inline ausgeführt, sind immer aktiviert und erfordern keine manuelle Konfiguration durch den Benutzer:

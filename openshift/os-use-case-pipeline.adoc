@@ -18,6 +18,7 @@ In diesem Abschnitt werden die Schritte zum Bereitstellen einer CI/CD-Pipeline (
 
 
 
+[[create-the-resources-required-for-jenkins-deployment]]
 == Erstellen Sie die für die Jenkins-Bereitstellung erforderlichen Ressourcen
 
 Führen Sie die folgenden Schritte aus, um die für die Bereitstellung der Jenkins-Anwendung erforderlichen Ressourcen zu erstellen:
@@ -33,6 +34,7 @@ image:redhat-openshift-016.png["Abbildung, die einen Eingabe-/Ausgabedialog zeig
 
 
 
+[[deploy-jenkins-with-persistent-storage]]
 == Jenkins mit persistentem Speicher bereitstellen
 
 Führen Sie die folgenden Schritte aus, um Jenkins mit persistentem Speicher bereitzustellen:

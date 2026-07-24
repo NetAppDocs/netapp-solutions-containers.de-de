@@ -24,6 +24,7 @@ Weitere Informationen zu OSP finden Sie imlink:https://www.redhat.com/en/technol
 
 
 
+[[openstack-services]]
 == OpenStack-Dienste
 
 OpenStack Platform-Dienste werden als Container bereitgestellt, wodurch die Dienste voneinander isoliert werden und einfache Upgrades ermöglicht werden.  Die OpenStack-Plattform verwendet eine Reihe von Containern, die mit Kolla erstellt und verwaltet werden.  Die Bereitstellung der Dienste erfolgt durch Abrufen von Container-Images aus dem Red Hat Custom Portal.  Diese Service-Container werden mit dem Podman-Befehl verwaltet und mit Red Hat OpenStack Director bereitgestellt, konfiguriert und gewartet.
@@ -63,6 +64,7 @@ image:redhat-openshift-034.png["Abbildung, die einen Eingabe-/Ausgabedialog zeig
 |===
 
 
+[[network-design]]
 == Netzwerkdesign
 
 Die Red Hat OpenShift-Lösung mit NetApp verwendet zwei Daten-Switches, um eine primäre Datenkonnektivität mit 25 Gbit/s bereitzustellen.  Außerdem werden zwei zusätzliche Verwaltungsswitches verwendet, die eine Konnektivität mit 1 Gbit/s für die In-Band-Verwaltung der Speicherknoten und eine Out-of-Band-Verwaltung für die IPMI-Funktionalität bieten.
@@ -71,6 +73,7 @@ Red Hat OpenStack Director benötigt die IPMI-Funktionalität, um Red Hat OpenSt
 
 
 
+[[vlan-requirements]]
 === VLAN Anforderungen
 
 Red Hat OpenShift mit NetApp ist darauf ausgelegt, den Netzwerkverkehr für verschiedene Zwecke durch die Verwendung virtueller lokaler Netzwerke (VLANs) logisch zu trennen.  Diese Konfiguration kann skaliert werden, um den Kundenanforderungen gerecht zu werden oder um eine weitere Isolierung für bestimmte Netzwerkdienste bereitzustellen.  In der folgenden Tabelle sind die VLANs aufgeführt, die zur Implementierung der Lösung während der Validierung der Lösung bei NetApp erforderlich sind.
@@ -108,6 +111,7 @@ Red Hat OpenShift mit NetApp ist darauf ausgelegt, den Netzwerkverkehr für vers
 |===
 
 
+[[network-infrastructure-support-resources]]
 === Ressourcen zur Unterstützung der Netzwerkinfrastruktur
 
 Vor der Bereitstellung der OpenShift Container Platform sollte die folgende Infrastruktur vorhanden sein:
@@ -119,12 +123,14 @@ Vor der Bereitstellung der OpenShift Container Platform sollte die folgende Infr
 
 
 
+[[best-practices-for-production-deployments]]
 == Best Practices für Produktionsbereitstellungen
 
 In diesem Abschnitt werden mehrere bewährte Methoden aufgeführt, die ein Unternehmen berücksichtigen sollte, bevor es diese Lösung in der Produktion einsetzt.
 
 
 
+[[deploy-openshift-to-an-osp-private-cloud-with-at-least-three-compute-nodes]]
 === Stellen Sie OpenShift in einer privaten OSP-Cloud mit mindestens drei Rechenknoten bereit
 
 Die in diesem Dokument beschriebene verifizierte Architektur stellt die für HA-Vorgänge geeignete Mindesthardwarebereitstellung dar, indem drei OSP-Controllerknoten und zwei OSP-Rechenknoten bereitgestellt werden.  Diese Architektur gewährleistet eine fehlertolerante Konfiguration, in der beide Rechenknoten virtuelle Instanzen starten und bereitgestellte VMs zwischen den beiden Hypervisoren migrieren können.
@@ -133,6 +139,7 @@ Da Red Hat OpenShift zunächst mit drei Masterknoten bereitgestellt wird, kann e
 
 
 
+[[configure-virtual-machinehost-affinity]]
 === Konfigurieren der Affinität zwischen virtueller Maschine und Host
 
 Die Verteilung der OpenShift-Master auf mehrere Hypervisor-Knoten kann durch die Aktivierung der VM/Host-Affinität erreicht werden.
@@ -148,6 +155,7 @@ Informationen zum Konfigurieren von Affinitätsgruppen finden Sie unterlink:http
 
 
 
+[[use-a-custom-install-file-for-openshift-deployment]]
 === Verwenden Sie eine benutzerdefinierte Installationsdatei für die OpenShift-Bereitstellung
 
 IPI vereinfacht die Bereitstellung von OpenShift-Clustern durch den interaktiven Assistenten, der weiter oben in diesem Dokument beschrieben wurde.  Es ist jedoch möglich, dass Sie im Rahmen einer Clusterbereitstellung einige Standardwerte ändern müssen.

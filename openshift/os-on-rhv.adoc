@@ -31,12 +31,14 @@ image:redhat-openshift-003.png["Abbildung, die einen Eingabe-/Ausgabedialog zeig
 
 
 
+[[network-design]]
 == Netzwerkdesign
 
 Die Red Hat OpenShift-Lösung auf NetApp verwendet zwei Daten-Switches, um eine primäre Datenkonnektivität mit 25 Gbit/s bereitzustellen.  Außerdem werden zwei zusätzliche Verwaltungsswitches verwendet, die eine Konnektivität mit 1 Gbit/s für die In-Band-Verwaltung der Speicherknoten und eine Out-of-Band-Verwaltung für die IPMI-Funktionalität bieten.  OCP verwendet das logische Netzwerk der virtuellen Maschine auf RHV für die Clusterverwaltung.  In diesem Abschnitt werden die Anordnung und der Zweck jedes in der Lösung verwendeten virtuellen Netzwerksegments beschrieben und die Voraussetzungen für die Bereitstellung der Lösung dargelegt.
 
 
 
+[[vlan-requirements]]
 === VLAN Anforderungen
 
 Red Hat OpenShift auf RHV ist darauf ausgelegt, den Netzwerkverkehr für verschiedene Zwecke durch die Verwendung virtueller lokaler Netzwerke (VLANs) logisch zu trennen.  Diese Konfiguration kann skaliert werden, um den Kundenanforderungen gerecht zu werden oder um eine weitere Isolierung für bestimmte Netzwerkdienste bereitzustellen.  In der folgenden Tabelle sind die VLANs aufgeführt, die zur Implementierung der Lösung während der Validierung der Lösung bei NetApp erforderlich sind.
@@ -62,6 +64,7 @@ Red Hat OpenShift auf RHV ist darauf ausgelegt, den Netzwerkverkehr für verschi
 |===
 
 
+[[network-infrastructure-support-resources]]
 === Ressourcen zur Unterstützung der Netzwerkinfrastruktur
 
 Vor der Bereitstellung der OpenShift Container Platform sollte die folgende Infrastruktur vorhanden sein:
@@ -73,12 +76,14 @@ Vor der Bereitstellung der OpenShift Container Platform sollte die folgende Infr
 
 
 
+[[best-practices-for-production-deployments]]
 == Best Practices für Produktionsbereitstellungen
 
 In diesem Abschnitt werden mehrere bewährte Methoden aufgeführt, die ein Unternehmen berücksichtigen sollte, bevor es diese Lösung in der Produktion einsetzt.
 
 
 
+[[deploy-openshift-to-an-rhv-cluster-of-at-least-three-nodes]]
 === Stellen Sie OpenShift in einem RHV-Cluster mit mindestens drei Knoten bereit
 
 Die in diesem Dokument beschriebene verifizierte Architektur stellt die für HA-Vorgänge geeignete Mindesthardwarebereitstellung dar, indem zwei RHV-H-Hypervisorknoten bereitgestellt und eine fehlertolerante Konfiguration sichergestellt werden, bei der beide Hosts die gehostete Engine verwalten und bereitgestellte VMs zwischen den beiden Hypervisoren migrieren können.
@@ -87,6 +92,7 @@ Da Red Hat OpenShift zunächst mit drei Masterknoten bereitgestellt wird, ist in
 
 
 
+[[configure-virtual-machinehost-affinity]]
 === Konfigurieren der Affinität zwischen virtueller Maschine und Host
 
 Sie können die OpenShift-Master auf mehrere Hypervisor-Knoten verteilen, indem Sie die VM/Host-Affinität aktivieren.
@@ -99,6 +105,7 @@ Informationen zum Konfigurieren von Affinitätsgruppen finden Sie imlink:https:/
 
 
 
+[[use-a-custom-install-file-for-openshift-deployment]]
 === Verwenden Sie eine benutzerdefinierte Installationsdatei für die OpenShift-Bereitstellung
 
 IPI vereinfacht die Bereitstellung von OpenShift-Clustern durch den interaktiven Assistenten, der weiter oben in diesem Dokument beschrieben wurde.  Es ist jedoch möglich, dass einige Standardwerte im Rahmen der Clusterbereitstellung geändert werden müssen.

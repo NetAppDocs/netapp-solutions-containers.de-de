@@ -18,6 +18,7 @@ NetApp bietet eine Reihe von Produkten, die unsere Kunden bei der Orchestrierung
 
 
 
+[[anthos-ready-storage-partner-program]]
 == Anthos Ready-Speicherpartnerprogramm.
 
 Google Cloud fordert über sein Anthos Ready-Speicherpartnerprogramm regelmäßig eine aktualisierte Validierung der Partnerspeicherintegrationen mit neuen Versionen von Anthos an.  Eine Liste der aktuell validierten Speicherlösungen, CSI-Treiber, verfügbaren Funktionen und der unterstützten Anthos-Versionen finden Sie https://cloud.google.com/anthos/docs/resources/partner-storage["hier,"^] .
@@ -72,6 +73,7 @@ Die folgende Tabelle enthält die Anthos-Versionen, die von NetApp und NetApp -P
 |===
 
 
+[[netapp-storage-integrations]]
 == NetApp Storage-Integrationen
 
 NetApp bietet eine Reihe von Produkten, die Sie bei der Orchestrierung und Verwaltung persistenter Daten in containerbasierten Umgebungen wie Anthos unterstützen.

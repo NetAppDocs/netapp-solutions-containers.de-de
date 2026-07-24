@@ -24,6 +24,7 @@ image:redhat-openshift-040.png["Mandantenfähigkeit auf Red Hat OpenShift-Cluste
 
 
 
+[[technology-requirements]]
 == Technologieanforderungen
 
 . NetApp ONTAP Speichercluster
@@ -33,6 +34,7 @@ image:redhat-openshift-040.png["Mandantenfähigkeit auf Red Hat OpenShift-Cluste
 
 
 
+[[red-hat-openshift-cluster-resources]]
 == Red Hat OpenShift – Cluster-Ressourcen
 
 Aus Sicht des Red Hat OpenShift-Clusters ist das Projekt die Ressource der obersten Ebene, mit der man beginnen sollte.  Ein OpenShift-Projekt kann als Clusterressource betrachtet werden, die den gesamten OpenShift-Cluster in mehrere virtuelle Cluster aufteilt.  Daher bietet die Isolation auf Projektebene eine Grundlage für die Konfiguration der Mandantenfähigkeit.
@@ -41,18 +43,21 @@ Als Nächstes muss RBAC im Cluster konfiguriert werden.  Die beste Vorgehensweis
 
 
 
+[[netapp-ontap]]
 == NetApp ONTAP
 
 Es ist wichtig, den gemeinsam genutzten Speicher zu isolieren, der als persistenter Speicheranbieter für einen Red Hat OpenShift-Cluster dient, um sicherzustellen, dass die auf dem Speicher für jedes Projekt erstellten Volumes den Hosts so erscheinen, als wären sie auf einem separaten Speicher erstellt worden.  Erstellen Sie dazu auf NetApp ONTAP so viele SVMs (Storage Virtual Machines), wie Projekte oder Workloads vorhanden sind, und weisen Sie jede SVM einem Workload zu.
 
 
 
+[[trident]]
 == Trident
 
 Nachdem Sie unterschiedliche SVMs für unterschiedliche Projekte auf NetApp ONTAP erstellt haben, müssen Sie jedes SVM einem anderen Trident Backend zuordnen.  Die Backend-Konfiguration auf Trident steuert die Zuweisung von persistentem Speicher zu OpenShift-Clusterressourcen und erfordert die Details der SVM, der eine Zuordnung erfolgen soll.  Dies sollte mindestens der Protokolltreiber für das Backend sein.  Optional können Sie definieren, wie die Volumes auf dem Speicher bereitgestellt werden, und Grenzwerte für die Größe der Volumes oder die Verwendung von Aggregaten usw. festlegen.  Details zur Definition der Trident -Backends finden Sie https://docs.netapp.com/us-en/trident/trident-use/backends.html["hier,"^] .
 
 
 
+[[red-hat-openshift-storage-resources]]
 == Red Hat OpenShift – Speicherressourcen
 
 Nach der Konfiguration der Trident -Backends besteht der nächste Schritt darin, StorageClasses zu konfigurieren.  Konfigurieren Sie so viele Speicherklassen wie Backends vorhanden sind und gewähren Sie jeder Speicherklasse Zugriff auf das Hochfahren von Volumes nur auf einem Backend.  Wir können die StorageClass einem bestimmten Trident Backend zuordnen, indem wir beim Definieren der Speicherklasse den Parameter storagePools verwenden.  Die Details zur Definition einer Speicherklasse finden Sie https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html["hier,"^] .  Daher gibt es eine Eins-zu-eins-Zuordnung von StorageClass zum Trident Backend, die auf eine SVM zurückverweist.  Dadurch wird sichergestellt, dass alle Speicheransprüche über die diesem Projekt zugewiesene StorageClass nur von der SVM bedient werden, die diesem Projekt gewidmet ist.

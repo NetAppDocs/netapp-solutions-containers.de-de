@@ -23,6 +23,7 @@ NOTE: Trident Protect erfordert ein Register zum Hosten der von den Astra Contai
 
 
 
+[[creating-a-private-image-registry]]
 == Erstellen einer privaten Bildregistrierung
 
 . Entfernen Sie die Standardannotation aus der aktuellen Standardspeicherklasse und kommentieren Sie die von Trident unterstützte Speicherklasse als Standard für den OpenShift-Cluster.

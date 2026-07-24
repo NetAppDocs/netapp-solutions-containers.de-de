@@ -20,6 +20,7 @@ Seesaw ist der standardmäßig verwaltete Netzwerk-Load Balancer, der in einer A
 
 
 
+[[installing-the-seesaw-load-balancer]]
 == Installieren des SeeSaw-Lastenausgleichs
 
 Der SeeSaw-Load Balancer ist vollständig in Anthos-Cluster auf VMware integriert und verfügt über eine automatisierte Bereitstellung als Teil der Admin- und Benutzercluster-Setups.  Es gibt Textblöcke in der `cluster.yaml` Konfigurationsdateien, die geändert werden müssen, um Load Balancer-Informationen bereitzustellen, und dann gibt es einen zusätzlichen Schritt vor der Clusterbereitstellung, um den Load Balancer mithilfe der integrierten `gkectl` Werkzeug.
@@ -29,6 +30,7 @@ NOTE: SeeSaw-Lastverteiler können im HA- oder Nicht-HA-Modus bereitgestellt wer
 
 
 
+[[integration-with-anthos]]
 == Integration mit Anthos
 
 In jeder Konfigurationsdatei gibt es einen Abschnitt für den Administratorcluster und in jedem Benutzercluster, den Sie bereitstellen möchten, um den Load Balancer so zu konfigurieren, dass er von Anthos On-Prem verwaltet wird.
