@@ -14,7 +14,7 @@ summary: Dieser Abschnitt befasst sich mit der Erstellung und Konfiguration eine
 
 
 [role="lead"]
-Für die meisten Bereitstellungen von Red Hat OpenShift wird ein öffentliches Register wie https://quay.io["Quay.io"] oder https://hub.docker.com["DockerHub"] erfüllt die Bedürfnisse der meisten Kunden.  Es gibt jedoch Fälle, in denen ein Kunde seine eigenen privaten oder benutzerdefinierten Bilder hosten möchte.
+Für die meisten Deployments von Red Hat OpenShift erfüllt die Verwendung einer öffentlichen Registry wie link:https://quay.io["Quay.io"^] oder link:https://hub.docker.com["DockerHub"^] die Bedürfnisse der meisten Kunden. Es gibt jedoch Fälle, in denen ein Kunde eigene private oder angepasste Images hosten möchte.
 
 Dieses Verfahren dokumentiert die Erstellung einer privaten Image-Registrierung, die durch ein persistentes Volume von Trident und NetApp ONTAP unterstützt wird.
 

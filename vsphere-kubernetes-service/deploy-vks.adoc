@@ -1,0 +1,216 @@
+---
+sidebar: sidebar 
+permalink: vsphere-kubernetes-service/deploy-vks.html 
+keywords: vks, cluster, install, worker nodes, iscsi, nvme, custom image 
+summary: Einen vSphere Kubernetes Service Cluster in Ihrer VCF-Umgebung mit der entsprechenden Worker-Knoten-Konfiguration installieren. 
+---
+= Einen vSphere Kubernetes Service Cluster installieren
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ein vSphere Kubernetes Service (VKS) Cluster wird in Ihrer VCF 9.1 Umgebung installiert, und die Worker-Knoten werden mit den passenden Speicherdienstprogrammen für Ihre Workloads konfiguriert.
+
+.Über diese Aufgabe
+NFS-Dienstprogramme werden automatisch auf den Worker-Knoten des von Ihnen erstellten Clusters installiert. Wenn Worker-Knoten mit installierten iSCSI- oder NVMe-Dienstprogrammen benötigt werden, ist ein benutzerdefiniertes OVA-Image zu erstellen und dieses für die Worker-Knoten zu verwenden. Das benutzerdefinierte Image kann mit Docker erstellt werden, und das  `vcf` Befehlszeilentool kann anschließend verwendet werden, um aus diesem Image eine OVA-Datei zu erstellen. Diese OVA-Datei kann in die Content Library in vSphere hochgeladen werden. Bei der Erstellung des VKS-Clusters kann dieses Image aus der Content Library für die Node Pools ausgewählt werden.
+
+.Schritte
+. Den VKS Cluster erstellen:
++
+Sie können einen VKS-Cluster entweder mit dem Standard-Worker-Node-Image oder mit einem benutzerdefinierten Image erstellen. Das Standard-Worker-Node-Image enthält vorinstallierte NFS-Dienstprogramme, während das benutzerdefinierte Image iSCSI- und NVMe-Dienstprogramme enthalten kann. Die folgenden Optionen sind verfügbar:
+
++
+** *Nur NAS (Standard):* Ein VKS-Cluster wird mit dem Standard-Worker-Node-Image erstellt, das vorinstallierte NFS-Dienstprogramme enthält.
+** *SAN-fähig (benutzerdefiniertes Image):* Ein benutzerdefiniertes Docker-Image, das iSCSI- und NVMe-Dienstprogramme enthält, erstellen, eine OVA-Datei mit dem  `vcf` Befehlszeilentool generieren, die OVA in die vSphere Content Library hochladen und anschließend den VKS-Cluster erstellen, wobei dieses benutzerdefinierte Image für die Node Pools ausgewählt wird.
++
+.Anweisungen zum Erstellen eines reinen NAS-vSphere Kubernetes Service-Clusters mit dem Standard-Worker-Node-Image anzeigen
+[%collapsible]
+====
+Der VKS-Cluster wird mit dem Standard-Worker-Node-Image erstellt. In den Eingabeaufforderungen werden der Clustername, die Node-Pool-Konfiguration und weitere Einstellungen angegeben.
+
+Im vSphere Client zum Namespace wechseln, in dem der vSphere Kubernetes-Cluster erstellt werden soll. Auf der Registerkarte *Resources* dieses Namespace im Abschnitt Kubernetes auf *Create Cluster* klicken oder auf *Go to Service* und anschließend auf *Create Cluster* klicken.
+
+Das Formular mit den Clusterdetails ausfüllen:
+
+*** Im Abschnitt 1, *Konfigurationstyp*, *Benutzerdefiniert* auswählen.
+*** Im Abschnitt 2, *Allgemeine Einstellungen*, einen Namen für den Cluster angeben und alle anderen Einstellungen auf ihren Standardwerten belassen.
+*** Alle Standardeinstellungen für Abschnitt 3 übernehmen.
+*** In Abschnitt 4, *Node Pools*, auf die Auslassungspunkte (...) neben dem Node Pool klicken und *Bearbeiten* auswählen. Die Anzahl der Replikate auf 3 erhöhen und die neueste Ubuntu-Version für das OS-Image auswählen. *Weiter* und anschließend *Überprüfen und bestätigen* auswählen.
+
+
+Nachdem die Clusterdetails überprüft wurden, auf *Fertigstellen* klicken. Der vSphere Kubernetes-Cluster wird in wenigen Minuten erstellt.
+
+image::vks-create-001.png[Namespace in vCenter]
+
+image::vks-create-002.png[Clusterkonfigurationstyp erstellen]
+
+image::vks-create-003.png[Allgemeine Cluster-Einstellungen erstellen]
+
+image::vks-create-004.png[Cluster Control Plane erstellen]
+
+image::vks-create-005.png[Cluster Node Pools erstellen]
+
+image::vks-create-006.png[Cluster erstellen Fertigstellen]
+
+image::vks-create-007.png[Clustererstellung abgeschlossen]
+
+====
++
+.Anleitung für die Erstellung eines benutzerdefinierten OVA-Images für SAN-fähige Worker-Knoten anzeigen
+[%collapsible]
+====
+Ein Docker-Image mit den erforderlichen Hilfsprogrammen erstellen. Im folgenden Beispiel wird die Erstellung eines Docker-Images auf Basis von Ubuntu 24.04 mit installierten iSCSI- und Multipathing-Hilfsprogrammen gezeigt.
+
+[source, docker]
+----
+#san-dockerfile.txt
+FROM ubuntu:24.04
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+# Install required system packages for iSCSI and Multipathing
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    nvme-cli \
+    kmod \
+    linux-tools-common \
+    open-iscsi \
+    lsscsi \
+    sg3-utils \
+    multipath-tools \
+    scsitools  \
+    chrony \
+    networkd-dispatcher &&\
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+# Set iSCSI session scanning to manual as required by Trident
+RUN sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
+# Configure device-mapper-multipath with Trident recommendations
+RUN printf "defaults {\n    user_friendly_names yes\n    find_multipaths no\n}\n" > /etc/multipath.conf
+RUN mkdir -p /etc/networkd-dispatcher/off.d /etc/networkd-dispatcher/routable.d/
+CMD ["bash"]
+----
+Das Docker-Image wird mit folgendem Befehl erstellt:
+
+[source, docker]
+----
+docker build -f san-dockerfile.txt -t ubuntu-2404:san .
+----
+Falls keine Docker registry verfügbar ist, kann folgender Befehl verwendet werden, um eine lokale Registry zu starten und das Image dorthin zu übertragen:
+
+[source, docker]
+----
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+----
+Das Bild wird getaggt und gepusht.
+
+[source, docker]
+----
+docker tag ubuntu-2404:san localhost:5000/ubuntu-2404:san
+docker push localhost:5000/ubuntu-2404:san
+----
+Die Image Konfigurationsdatei erstellen (als  `ubuntu2404vkr135-san.yml` speichern) und auf das Image verweisen:
+
+[source, yaml]
+----
+#ubuntu2404vkr135-san.yml
+apiVersion: imageconfiguration.vmware.com/v1alpha1
+kind: Image
+metadata:
+    name: ubuntu-2404-amd64-v1.35.5---vmware.1-vkr.1
+spec:
+    osSpec:
+        name: ubuntu
+        version: "24.04"
+        image: "localhost:5000/ubuntu-2404:san"
+    kubernetesSpec:
+        image: projects.packages.broadcom.com/vsphere/iaas/kubernetes-release/1.35.5/kubernetes-distribution-image:v1.35.5_vmware.1-vkr.1
+    diskSize: 20Gi
+    repositorySpec:
+        debs:
+            - name: noble
+              url: http://archive.ubuntu.com/ubuntu
+              suites:
+                  - noble
+              components:
+                  - main
+                  - restricted
+                  - universe
+                  - multiverse
+            - name: noble-security
+              url: http://security.ubuntu.com/ubuntu
+              suites:
+                  - noble-security
+              components:
+                  - main
+                  - restricted
+                  - universe
+                  - multiverse
+    packages:
+      present:                  # Packages to install
+        - name: open-iscsi
+        - name: lsscsi
+        - name: sg3-utils
+        - name: multipath-tools
+        - name: scsitools
+        - name: nvme-cli
+    services:
+      - name: multipath-tools.service
+        status: enabled
+      - name: open-iscsi.service
+        status: enabled
+----
+
+NOTE: Der Metadatenname muss aus der Liste der vorab genehmigten Namen stammen. Ist dies nicht der Fall, tritt beim Versuch, die OVA-Datei zu erstellen, der unten gezeigte Fehler auf. Die Liste der vorab genehmigten Namen befindet sich in der VCF CLI-Hilfe für den  `kr bake` Befehl.
+
+image::vks-006.png[Fehler, wenn der Metadatenname nicht in der vorab genehmigten Liste enthalten ist]
+
+Die OVA-Datei wird mithilfe der VCF-Befehlszeilenschnittstelle erstellt:
+
+[source, cli]
+----
+vcf kr bake -f <path/to/ubuntu2404vkr135-san.yml> --log-level DEBUG --log-format plain
+----
+Übertragen Sie die OVA-Datei per SCP auf einen Rechner, von dem aus Sie sie in die vSphere Content Library hochladen können.
+
+====
+
+
+. Nachdem der Cluster installiert ist, befindet er sich in vCenter, und die kubeconfig-Datei kann heruntergeladen werden.
++
+.. Im Hauptmenü *Supervisor Management* auswählen und den Namespace wählen, in dem das Cluster erstellt wurde.
+.. Den Tab *Compute* und anschließend *Kubernetes Clusters* auswählen. Alle Cluster im Namespace werden angezeigt.
+.. Zum Tab *Ressourcen* wechseln, den benötigten Kubernetes-Cluster auswählen und dessen kubeconfig-Datei herunterladen.
++
+image::vks-001.png[Menü „Vorgesetztenverwaltung“ in vCenter]
+
++
+image::vks-002.png[Kubernetes-Cluster-Liste in vCenter]
+
++
+image::vks-003.png[Registerkarte „Resources“]
+
++
+image::vks-004.png[kubeconfig Download für einen Cluster]
+
+
+
+. Von einem Bastion-Host aus kann über die kubeconfig-Datei eine Verbindung zum Cluster hergestellt werden, um ihn über die CLI zu verwalten.
++
+image::vks-005.png[CLI-Verbindung zum VKS-Cluster über kubeconfig]
+
+
+
+
+
+[[video-demonstration]]
+== Videodemonstration
+
+Das folgende Video demonstriert die Erstellung eines vSphere Kubernetes-Clusters.
+
+.Einen vSphere Kubernetes Cluster auf dem Supervisor Cluster erstellen
+video::4ef64b3c-7a68-41d5-bacf-b4a8012b49f8[panopto,width=360]

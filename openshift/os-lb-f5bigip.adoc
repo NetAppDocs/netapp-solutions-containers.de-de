@@ -60,23 +60,23 @@ NOTE: Ein F5 BIG-IP-System kann auf dedizierter Hardware, in der Cloud oder als 
 [[installation]]
 == Installation
 
-. Installieren Sie die Erweiterung F5 Application Services 3, damit BIG-IP-Systeme Konfigurationen in JSON anstelle von imperativen Befehlen akzeptieren können.  Gehe zu https://github.com/F5Networks/f5-appsvcs-extension/releases["F5 AS3 GitHub-Repository"^] , und laden Sie die neueste RPM-Datei herunter.
+. Die F5 Application Services 3 Erweiterung installieren, damit BIG-IP Systeme Konfigurationen im JSON-Format anstelle von imperativen Befehlen akzeptieren. Zu link:https://github.com/F5Networks/f5-appsvcs-extension/releases["F5 AS3 GitHub-Repository"^] gehen und die neueste RPM-Datei herunterladen.
 . Melden Sie sich beim F5 BIG-IP-System an, navigieren Sie zu iApps > Package Management LX und klicken Sie auf Importieren.
 . Klicken Sie auf „Datei auswählen“ und wählen Sie die heruntergeladene AS3-RPM-Datei aus. Klicken Sie auf „OK“ und dann auf „Hochladen“.
 +
-image:redhat-openshift-109.png["iApps hochladen"]
+image::redhat-openshift-109.png[iApps hochladen]
 
 . Bestätigen Sie, dass die AS3-Erweiterung erfolgreich installiert wurde.
 +
-image:redhat-openshift-110.png["AS3-Installationsvalidierung"]
+image::redhat-openshift-110.png[AS3-Installationsvalidierung]
 
 . Konfigurieren Sie als Nächstes die für die Kommunikation zwischen OpenShift- und BIG-IP-Systemen erforderlichen Ressourcen.  Erstellen Sie zunächst einen Tunnel zwischen OpenShift und dem BIG-IP-Server, indem Sie auf dem BIG-IP-System eine VXLAN-Tunnelschnittstelle für OpenShift SDN erstellen.  Navigieren Sie zu Netzwerk > Tunnel > Profile, klicken Sie auf Erstellen und legen Sie das übergeordnete Profil auf vxlan und den Flooding-Typ auf Multicast fest.  Geben Sie einen Namen für das Profil ein und klicken Sie auf „Fertig“.
 +
-image:redhat-openshift-111.png["VXLAN-Profil erstellen"]
+image::redhat-openshift-111.png[VXLAN-Profil erstellen]
 
 . Navigieren Sie zu Netzwerk > Tunnel > Tunnelliste, klicken Sie auf Erstellen und geben Sie den Namen und die lokale IP-Adresse für den Tunnel ein.  Wählen Sie das im vorherigen Schritt erstellte Tunnelprofil aus und klicken Sie auf „Fertig“.
 +
-image:redhat-openshift-112.png["VXLAN-Tunnel erstellen"]
+image::redhat-openshift-112.png[VXLAN-Tunnel erstellen]
 
 . Melden Sie sich mit Cluster-Administratorberechtigungen beim Red Hat OpenShift-Cluster an.
 . Erstellen Sie auf OpenShift ein Hostsubnetz für den F5 BIG-IP-Server, das das Subnetz vom OpenShift-Cluster auf den F5 BIG-IP-Server erweitert.  Laden Sie die YAML-Definition des Host-Subnetzes herunter.
@@ -134,11 +134,11 @@ ocp-vmw-nszws-worker-wtgfw   ocp-vmw-nszws-worker-wtgfw   10.63.172.17    10.128
 ----
 . Erstellen Sie eine eigene IP auf OpenShift VXLAN mit einer IP im Host-Subnetzbereich von OpenShift, die dem F5 BIG-IP-Server entspricht.  Melden Sie sich beim F5 BIG-IP-System an, navigieren Sie zu Netzwerk > Eigene IPs und klicken Sie auf Erstellen.  Geben Sie eine IP aus dem für das F5 BIG-IP-Host-Subnetz erstellten Cluster-IP-Subnetz ein, wählen Sie den VXLAN-Tunnel aus und geben Sie die anderen Details ein.  Klicken Sie dann auf „Fertig“.
 +
-image:redhat-openshift-113.png["Erstellen Sie eine eigene IP für VXLAN"]
+image::redhat-openshift-113.png[Erstellen Sie eine eigene IP für VXLAN]
 
 . Erstellen Sie eine Partition im F5 BIG-IP-System, die mit CIS konfiguriert und verwendet werden soll.  Navigieren Sie zu System > Benutzer > Partitionsliste, klicken Sie auf Erstellen und geben Sie die Details ein.  Klicken Sie dann auf „Fertig“.
 +
-image:redhat-openshift-114.png["BIG-IP-Partition erstellen"]
+image::redhat-openshift-114.png[BIG-IP-Partition erstellen]
 
 +
 
@@ -166,24 +166,24 @@ customresourcedefinition.apiextensions.k8s.io/ingresslinks.cis.f5.com created
 ----
 . Navigieren Sie zu Operatoren > OperatorHub, suchen Sie nach dem Schlüsselwort F5 und klicken Sie auf die Kachel F5 Container Ingress Service.
 +
-image:redhat-openshift-115.png["F5 CIS im OperatorHub"]
+image::redhat-openshift-115.png[F5 CIS im OperatorHub]
 
 . Lesen Sie die Betreiberinformationen und klicken Sie auf Installieren.
 +
-image:redhat-openshift-116.png["F5 CIS-Infokachel im OperatorHub"]
+image::redhat-openshift-116.png[F5 CIS-Infokachel im OperatorHub]
 
 . Behalten Sie auf dem Bildschirm „Operator installieren“ alle Standardparameter bei und klicken Sie auf „Installieren“.
 +
-image:redhat-openshift-117.png["Installieren Sie den F5 CIS-Operator"]
+image::redhat-openshift-117.png[Installieren Sie den F5 CIS-Operator]
 
 . Die Installation des Operators dauert eine Weile.
 +
-image:redhat-openshift-118.png["Installationsfortschritt von F5 CIS Operator"]
+image::redhat-openshift-118.png[Installationsfortschritt von F5 CIS Operator]
 
 . Nachdem der Operator installiert wurde, wird die Meldung „Installation erfolgreich“ angezeigt.
 . Navigieren Sie zu „Operatoren > Installierte Operatoren“, klicken Sie auf „F5 Container Ingress Service“ und dann unter der Kachel „F5BigIpCtlr“ auf „Instanz erstellen“.
 +
-image:redhat-openshift-119.png["Erstellen Sie F5BigIpCtlr"]
+image::redhat-openshift-119.png[Erstellen Sie F5BigIpCtlr]
 
 . Klicken Sie auf „YAML-Ansicht“ und fügen Sie den folgenden Inhalt ein, nachdem Sie die erforderlichen Parameter aktualisiert haben.
 +
@@ -227,7 +227,7 @@ spec:
 ----
 . Klicken Sie nach dem Einfügen dieses Inhalts auf „Erstellen“.  Dadurch werden die CIS-Pods im Kube-System-Namespace installiert.
 +
-image:redhat-openshift-120.png["Validieren von F5 CIS-Pods"]
+image::redhat-openshift-120.png[Validieren von F5 CIS-Pods]
 
 +
 
@@ -464,6 +464,6 @@ f5-demo-test-57c46f6f98-cl2m8   1/1     Running   0          27s
 ----
 . Prüfen Sie, ob für den Dienst vom Typ LoadBalancer in OpenShift der entsprechende virtuelle Server im BIG-IP-System angelegt ist.  Navigieren Sie zu Lokaler Datenverkehr > Virtuelle Server > Liste der virtuellen Server.
 +
-image:redhat-openshift-121.png["Validieren Sie die Erstellung virtueller BIG-IP-Server für den entsprechenden Diensttyp LoadBalancer"]
+image::redhat-openshift-121.png[Validieren Sie die Erstellung virtueller BIG-IP-Server für den entsprechenden Diensttyp LoadBalancer]
 
 

@@ -29,7 +29,7 @@ Weitere Informationen zu OSP finden Sie imlink:https://www.redhat.com/en/technol
 
 OpenStack Platform-Dienste werden als Container bereitgestellt, wodurch die Dienste voneinander isoliert werden und einfache Upgrades ermöglicht werden.  Die OpenStack-Plattform verwendet eine Reihe von Containern, die mit Kolla erstellt und verwaltet werden.  Die Bereitstellung der Dienste erfolgt durch Abrufen von Container-Images aus dem Red Hat Custom Portal.  Diese Service-Container werden mit dem Podman-Befehl verwaltet und mit Red Hat OpenStack Director bereitgestellt, konfiguriert und gewartet.
 
-image:redhat-openshift-034.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-034.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 [cols="15%, 15%, 70%"]
 |===

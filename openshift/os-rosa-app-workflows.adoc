@@ -25,7 +25,7 @@ In diesem Dokument wird beschrieben, wie Sie NetApp ONTAP mit dem Red Hat OpenSh
 
 **A.  Erstellen Sie eine VolumeSnapshotClass. Speichern Sie das folgende Manifest in einer Datei namens volume-snapshot-class.yaml
 
-[source]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -36,11 +36,11 @@ deletionPolicy: Delete
 ----
 Erstellen Sie mithilfe des obigen Manifests einen Snapshot.
 
-image:redhat-openshift-container-rosa-020.png["Snapshot-Klasse"]
+image::redhat-openshift-container-rosa-020.png[Snapshot-Klasse]
 
 **B.  Erstellen Sie als Nächstes einen Snapshot.** Erstellen Sie einen Snapshot des vorhandenen PVC, indem Sie VolumeSnapshot erstellen, um eine zeitpunktbezogene Kopie Ihrer Postgresql-Daten zu erstellen.  Dadurch wird ein FSx-Snapshot erstellt, der im Dateisystem-Backend fast keinen Platz einnimmt.  Speichern Sie das folgende Manifest in einer Datei namens volume-snapshot.yaml:
 
-[source]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
@@ -55,13 +55,13 @@ spec:
 
 Löschen Sie die Datenbank, um den Datenverlust zu simulieren (Datenverlust kann aus verschiedenen Gründen auftreten, hier simulieren wir ihn nur durch Löschen der Datenbank).
 
-image:redhat-openshift-container-rosa-021.png["Volume-Schnappschuss"]
+image::redhat-openshift-container-rosa-021.png[Volume-Schnappschuss]
 
 **D.  Löschen Sie die Datenbank, um den Datenverlust zu simulieren (Datenverlust kann aus verschiedenen Gründen auftreten, hier simulieren wir ihn nur durch Löschen der Datenbank)**
 
-image:redhat-openshift-container-rosa-022.png["Datenbankverbindung"]
+image::redhat-openshift-container-rosa-022.png[Datenbankverbindung]
 
-image:redhat-openshift-container-rosa-023.png["Datenbank löschen"]
+image::redhat-openshift-container-rosa-023.png[Datenbank löschen]
 
 
 
@@ -74,7 +74,7 @@ image:redhat-openshift-container-rosa-023.png["Datenbank löschen"]
 
 Um den vorherigen Zustand des Volumes wiederherzustellen, müssen Sie basierend auf den Daten im von Ihnen erstellten Snapshot einen neuen PVC erstellen.  Speichern Sie dazu das folgende Manifest in einer Datei mit dem Namen pvc-clone.yaml
 
-[source]
+[source, yaml]
 ----
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -94,33 +94,33 @@ spec:
 ----
 Erstellen Sie einen Klon des Volumes, indem Sie mithilfe des obigen Manifests einen PVC erstellen und dabei den Snapshot als Quelle verwenden.  Wenden Sie das Manifest an und stellen Sie sicher, dass der Klon erstellt wird.
 
-image:redhat-openshift-container-rosa-024.png["PostgreSQL-Klon aus Snapshot"]
+image::redhat-openshift-container-rosa-024.png[PostgreSQL-Klon aus Snapshot]
 
 **B.  Löschen Sie die ursprüngliche PostgreSQL-Installation**
 
-image:redhat-openshift-container-rosa-025.png["PostgreSQL-App löschen"]
+image::redhat-openshift-container-rosa-025.png[PostgreSQL-App löschen]
 
 **C.  Erstellen Sie eine neue PostgreSQL-Anwendung mit dem neuen Klon-PVC**
 
-[source]
+[source, bash]
 ----
 $ helm install postgresql bitnami/postgresql --set primary.persistence.enabled=true --set primary.persistence.existingClaim=postgresql-volume-clone -n postgresql
 ----
-image:redhat-openshift-container-rosa-026.png["PostgreSQL-Neuinstallation"]
+image::redhat-openshift-container-rosa-026.png[PostgreSQL-Neuinstallation]
 
 **D.  Überprüfen Sie, ob sich der Anwendungs-Pod im Ausführungsstatus befindet**
 
-image:redhat-openshift-container-rosa-027.png["PostgreSQL-Neuinstallation"]
+image::redhat-openshift-container-rosa-027.png[PostgreSQL-Neuinstallation]
 
 **e.  Überprüfen Sie, ob der Pod den Klon als PVC verwendet**
 
-image:redhat-openshift-container-rosa-028.png["PostgreSQL Neuinstallation beschreiben"]
+image::redhat-openshift-container-rosa-028.png[PostgreSQL Neuinstallation beschreiben]
 
-image:redhat-openshift-container-rosa-029.png["neues PVC ist der Klon"]
+image::redhat-openshift-container-rosa-029.png[neues PVC ist der Klon]
 
 f) Um zu überprüfen, ob die Datenbank wie erwartet wiederhergestellt wurde, gehen Sie zurück zur Containerkonsole und zeigen Sie die vorhandenen Datenbanken an
 
-image:redhat-openshift-container-rosa-030.png["Datenbank wiederhergestellt"]
+image::redhat-openshift-container-rosa-030.png[Datenbank wiederhergestellt]
 
 
 

@@ -19,38 +19,38 @@ Führen Sie die folgenden Schritte aus, um Advanced Cluster Management für Kube
 . Wählen Sie einen OpenShift-Cluster als Hub-Cluster und melden Sie sich mit Cluster-Admin-Berechtigungen an.
 . Navigieren Sie zu Operatoren > Operatoren-Hub und suchen Sie nach „Erweiterte Clusterverwaltung für Kubernetes“.
 +
-image:redhat-openshift-066.png["ACM-Kachel"]
+image::redhat-openshift-066.png[ACM-Kachel]
 
 . Wählen Sie „Erweiterte Clusterverwaltung für Kubernetes“ und klicken Sie auf „Installieren“.
 +
-image:redhat-openshift-067.png["ACM-Kacheldetails"]
+image::redhat-openshift-067.png[ACM-Kacheldetails]
 
 . Geben Sie auf dem Bildschirm „Operator installieren“ die erforderlichen Details ein (NetApp empfiehlt, die Standardparameter beizubehalten) und klicken Sie auf „Installieren“.
 +
-image:redhat-openshift-068.png["ACM-Operator-Kachel installieren"]
+image::redhat-openshift-068.png[ACM-Operator-Kachel installieren]
 
 . Warten Sie, bis die Operatorinstallation abgeschlossen ist.
 +
-image:redhat-openshift-069.png["ACM-Operator-Installation läuft"]
+image::redhat-openshift-069.png[ACM-Operator-Installation läuft]
 
 . Klicken Sie nach der Installation des Operators auf „MultiClusterHub erstellen“.
 +
-image:redhat-openshift-070.png["ACM-Betreiber Multiclusterhub"]
+image::redhat-openshift-070.png[ACM-Betreiber Multiclusterhub]
 
 . Klicken Sie auf dem Bildschirm „MultiClusterHub erstellen“ auf „Erstellen“, nachdem Sie die Details angegeben haben.  Dadurch wird die Installation eines Multi-Cluster-Hubs eingeleitet.
 +
-image:redhat-openshift-071.png["Bildschirm „Multicluster-Hub erstellen“"]
+image::redhat-openshift-071.png[Bildschirm „Multicluster-Hub erstellen“]
 
 . Nachdem alle Pods im Open-Cluster-Management-Namespace in den Status „Ausgeführt“ und der Operator in den Status „Erfolgreich“ gewechselt sind, wird Advanced Cluster Management für Kubernetes installiert.
 +
-image:redhat-openshift-072.png["ACM-Operator installiert"]
+image::redhat-openshift-072.png[ACM-Operator installiert]
 
 . Es dauert einige Zeit, bis die Hub-Installation abgeschlossen ist. Danach wechselt der MultiCluster-Hub in den Status „Wird ausgeführt“.
 +
-image:redhat-openshift-073.png["Multicluster-Hub-fähig"]
+image::redhat-openshift-073.png[Multicluster-Hub-fähig]
 
 . Es erstellt eine Route im Open-Cluster-Management-Namespace.  Stellen Sie eine Verbindung mit der URL in der Route her, um auf die Advanced Cluster Management-Konsole zuzugreifen.
 +
-image:redhat-openshift-074.png["ACM-Konsolenroute"]
+image::redhat-openshift-074.png[ACM-Konsolenroute]
 
 

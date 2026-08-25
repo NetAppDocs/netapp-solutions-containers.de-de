@@ -46,9 +46,9 @@ Für die Einrichtung des Provisioner-Knotens erstellt der Kunde Bridge-Schnittst
 
 Die folgenden Bilder zeigen die Umgebung sowohl während der IPI-Bereitstellung als auch nach Abschluss der Bereitstellung.
 
-image:redhat-openshift-036.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-036.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
-image:redhat-openshift-037.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-037.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 
 

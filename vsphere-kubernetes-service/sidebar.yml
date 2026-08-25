@@ -1,0 +1,19 @@
+---
+section: vsphere-kubernetes-service
+title: vSphere Kubernetes Service mit NetApp Storage
+pdf-filename: vSphere Kubernetes Service mit NetApp Storage
+entries:
+- title: Überblick
+  pdf-filename: vSphere Kubernetes Service mit NetApp Storage Übersicht
+  url: "/vsphere-kubernetes-service/vks-overview.html"
+- title: Erste Schritte mit Storage und vSphere Kubernetes Service
+  pdf-filename: Erste Schritte mit Storage und vSphere Kubernetes Service
+  entries:
+  - title: vSphere Kubernetes Service bereitstellen
+    url: "/vsphere-kubernetes-service/deploy-vks.html"
+  - title: NetApp Storage-Vorteile für vSphere Kubernetes Service Workloads
+    url: "/vsphere-kubernetes-service/netapp-storage-vks.html"
+  - title: NetApp Storage-Bereitstellung für VKS-Workloads
+    url: "/vsphere-kubernetes-service/install-trident.html"
+  - title: VKS-Workloads mit NetApp Storage bereitstellen
+    url: "/vsphere-kubernetes-service/deploy-vks-workloads.html"

@@ -16,9 +16,9 @@ summary: Die NetApp Element -Software bietet modulare, skalierbare Leistung, wob
 [role="lead"]
 Die NetApp Element -Software bietet modulare, skalierbare Leistung, wobei jeder Speicherknoten garantierte Kapazität und Durchsatz für die Umgebung bereitstellt.  NetApp Element -Systeme können von 4 auf 100 Knoten in einem einzigen Cluster skaliert werden und bieten eine Reihe erweiterter Speicherverwaltungsfunktionen.
 
-image:redhat-openshift-064.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-064.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
-Weitere Informationen zu NetApp Element -Speichersystemen finden Sie auf der https://www.netapp.com/data-storage/solidfire/["NetApp Solidfire-Website"^] .
+Weitere Informationen zu NetApp Element Speichersystemen sind auf der link:https://www.netapp.com/data-storage/solidfire/["NetApp Solidfire-Website"^] verfügbar.
 
 
 

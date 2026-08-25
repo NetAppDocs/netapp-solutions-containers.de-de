@@ -34,7 +34,7 @@ Die Red Hat OpenShift Container Platform vereint Entwicklung und IT-Betrieb auf 
 * *Sicherheit und Containerkatalog* OpenShift bietet Mandantenfähigkeit und schützt den Benutzer vor der Ausführung schädlichen Codes, indem es etablierte Sicherheit mit Security-Enhanced Linux (SELinux), CGroups und Secure Computing Mode (seccomp) verwendet, um Container zu isolieren und zu schützen.  Es bietet außerdem Verschlüsselung durch TLS-Zertifikate für die verschiedenen Subsysteme und Zugriff auf Red Hat-zertifizierte Container (access.redhat.com/containers), die mit besonderem Augenmerk auf Sicherheit gescannt und bewertet werden, um Endbenutzern zertifizierte, vertrauenswürdige und sichere Anwendungscontainer bereitzustellen.
 
 
-image:redhat-openshift-004.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-004.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 
 
@@ -55,13 +55,13 @@ Die Bereitstellung der Installer Provisioned Infrastructure (IPI) von OpenShift 
 . Besuchen Sie die Red Hat OpenShiftlink:https://www.openshift.com["Webseite"^] und melden Sie sich mit Ihren SSO-Anmeldeinformationen an.
 . Wählen Sie die Umgebung aus, in der Sie Red Hat OpenShift bereitstellen möchten.
 +
-image:redhat-openshift-008.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-008.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Laden Sie auf dem nächsten Bildschirm das Installationsprogramm, das eindeutige Pull-Geheimnis und die CLI-Tools für die Verwaltung herunter.
 +
-image:redhat-openshift-009.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-009.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
-. Folgen Sie denlink:https://docs.openshift.com/container-platform/4.7/installing/index.html["Installationsanweisungen"] von Red Hat zur Bereitstellung in der Umgebung Ihrer Wahl.
+. Befolgen Sie die von Red Hat bereitgestellten link:https://docs.openshift.com/container-platform/4.7/installing/index.html["Installationsanweisungen"^] Anweisungen, um die Bereitstellung in Ihrer gewünschten Umgebung durchzuführen.
 
 
 

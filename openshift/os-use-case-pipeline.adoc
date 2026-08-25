@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: openshift/os-use-case-pipeline.html 
-keywords: CI/CD, Continuous integration, continuous deployment, Jenkins, PVC 
+keywords: CI CD, Continuous integration, continuous deployment, Jenkins, PVC 
 summary: In diesem Abschnitt werden die Schritte zum Bereitstellen einer kontinuierlichen Integration und kontinuierlichen Bereitstellung bzw. Bereitstellungspipeline mit Jenkins beschrieben, um den Lösungsbetrieb zu validieren. 
 ---
 = Bereitstellen einer Jenkins CI/CD-Pipeline mit persistentem Speicher: Red Hat OpenShift mit NetApp
@@ -25,12 +25,12 @@ Führen Sie die folgenden Schritte aus, um die für die Bereitstellung der Jenki
 
 . Erstellen Sie ein neues Projekt mit dem Namen Jenkins.
 +
-image:redhat-openshift-015.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-015.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . In diesem Beispiel haben wir Jenkins mit persistentem Speicher bereitgestellt.  Erstellen Sie das PVC, um den Jenkins-Build zu unterstützen.  Navigieren Sie zu Speicher > Persistent Volume Claims und klicken Sie auf Persistent Volume Claim erstellen.  Wählen Sie die erstellte Speicherklasse aus, stellen Sie sicher, dass der Anspruchsname des persistenten Volumes „Jenkins“ lautet, wählen Sie die entsprechende Größe und den entsprechenden Zugriffsmodus aus und klicken Sie dann auf „Erstellen“.
 
 
-image:redhat-openshift-016.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-016.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 
 
@@ -41,54 +41,54 @@ Führen Sie die folgenden Schritte aus, um Jenkins mit persistentem Speicher ber
 
 . Ändern Sie in der oberen linken Ecke die Rolle von Administrator zu Entwickler.  Klicken Sie auf +Hinzufügen und wählen Sie „Aus Katalog“ aus.  Suchen Sie in der Leiste „Nach Stichwort filtern“ nach Jenkins.  Wählen Sie den Jenkins-Dienst mit persistentem Speicher.
 +
-image:redhat-openshift-017.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-017.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Klicken `Instantiate Template` .
 +
-image:redhat-openshift-018.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-018.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Standardmäßig werden die Details für die Jenkins-Anwendung ausgefüllt.  Ändern Sie die Parameter entsprechend Ihren Anforderungen und klicken Sie auf „Erstellen“.  Dieser Prozess erstellt alle erforderlichen Ressourcen zur Unterstützung von Jenkins auf OpenShift.
 +
-image:redhat-openshift-019.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-019.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Es dauert ungefähr 10 bis 12 Minuten, bis die Jenkins-Pods in den Bereitschaftszustand wechseln.
 +
-image:redhat-openshift-020.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-020.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Navigieren Sie nach der Instanziierung der Pods zu „Netzwerk > Routen“.  Um die Jenkins-Webseite zu öffnen, klicken Sie auf die für die Jenkins-Route angegebene URL.
 +
-image:redhat-openshift-021.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-021.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Da beim Erstellen der Jenkins-App OpenShift OAuth verwendet wurde, klicken Sie auf „Mit OpenShift anmelden“.
 +
-image:redhat-openshift-022.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-022.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Autorisieren Sie das Jenkins-Dienstkonto für den Zugriff auf die OpenShift-Benutzer.
 +
-image:redhat-openshift-023.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-023.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Die Jenkins-Willkommensseite wird angezeigt.  Da wir einen Maven-Build verwenden, schließen Sie zuerst die Maven-Installation ab.  Navigieren Sie zu „Jenkins verwalten“ > „Globale Toolkonfiguration“ und klicken Sie dann in der Maven-Unterüberschrift auf „Maven hinzufügen“.  Geben Sie den gewünschten Namen ein und stellen Sie sicher, dass die Option „Automatisch installieren“ ausgewählt ist. Klicken Sie auf Speichern.
 +
-image:redhat-openshift-024.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-024.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Sie können jetzt eine Pipeline erstellen, um den CI/CD-Workflow zu demonstrieren.  Klicken Sie auf der Startseite im linken Menü auf „Neue Jobs erstellen“ oder „Neues Element“.
 +
-image:redhat-openshift-025.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-025.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Geben Sie auf der Seite „Element erstellen“ den gewünschten Namen ein, wählen Sie „Pipeline“ aus und klicken Sie auf „OK“.
 +
-image:redhat-openshift-026.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-026.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Wählen Sie die Registerkarte „Pipeline“ aus.  Wählen Sie im Dropdown-Menü „Beispielpipeline ausprobieren“ die Option „Github + Maven“ aus.  Der Code wird automatisch ausgefüllt. Klicken Sie auf Speichern.
 +
-image:redhat-openshift-027.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-027.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Klicken Sie auf „Jetzt erstellen“, um die Entwicklung durch die Vorbereitungs-, Erstellungs- und Testphase zu starten.  Es kann mehrere Minuten dauern, bis der gesamte Build-Prozess abgeschlossen ist und die Build-Ergebnisse angezeigt werden.
 +
-image:redhat-openshift-028.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-028.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 . Bei Codeänderungen kann die Pipeline neu erstellt werden, um die neue Softwareversion zu patchen und so eine kontinuierliche Integration und Bereitstellung zu ermöglichen.  Klicken Sie auf „Letzte Änderungen“, um die Änderungen seit der vorherigen Version zu verfolgen.
 +
-image:redhat-openshift-029.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-029.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 

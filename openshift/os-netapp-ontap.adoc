@@ -16,7 +16,7 @@ summary: NetApp ONTAP ist ein leistungsstarkes Storage-Softwaretool mit Funktion
 [role="lead"]
 NetApp ONTAP ist ein leistungsstarkes Storage-Softwaretool mit Funktionen wie einer intuitiven GUI, REST-APIs mit Automatisierungsintegration, KI-gestützter prädiktiver Analyse und Korrekturmaßnahmen, unterbrechungsfreien Hardware-Upgrades und speicherübergreifendem Import.
 
-Weitere Informationen zum NetApp ONTAP Speichersystem finden Sie auf der https://www.netapp.com/data-management/ontap-data-management-software/["NetApp ONTAP -Website"^] .
+Weitere Informationen zum NetApp ONTAP Speichersystem sind auf der link:https://www.netapp.com/data-management/ontap-data-management-software/["NetApp ONTAP -Website"^] verfügbar.
 
 ONTAP bietet die folgenden Funktionen:
 
@@ -37,12 +37,12 @@ ONTAP bietet die folgenden Funktionen:
 
 
 
-Weitere Informationen zu ONTAP finden Sie im https://docs.netapp.com/ontap-9/index.jsp["ONTAP 9 Dokumentationscenter"^] .
+Weitere Informationen zu ONTAP sind unter link:https://docs.netapp.com/ontap-9/index.jsp["ONTAP 9 Dokumentationscenter"^] zu finden.
 
 
 NOTE: NetApp ONTAP ist vor Ort, virtualisiert oder in der Cloud verfügbar.
 
-image:redhat-openshift-035.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-035.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 
 
@@ -58,7 +58,7 @@ NetApp bietet robuste All-Flash- (AFF) und Scale-Out-Hybrid- (FAS) Speicherplatt
 
 Beide Systeme basieren auf der Datenverwaltungssoftware NetApp ONTAP , der branchenweit fortschrittlichsten Datenverwaltungssoftware für hochverfügbares, Cloud-integriertes und vereinfachtes Speichermanagement, um die Geschwindigkeit, Effizienz und Sicherheit der Enterprise-Klasse zu bieten, die Ihr Data Fabric benötigt.
 
-Weitere Informationen zu NETAPP AFF/ FAS -Plattformen finden Sie unter https://docs.netapp.com/platstor/index.jsp["hier,"] .
+Weitere Informationen zu NetApp AFF/FAS Plattformen sind im link:https://docs.netapp.com/platstor/index.jsp["NetApp Hardwareplattform-Dokumentation"^] zu finden.
 
 
 
@@ -67,7 +67,7 @@ Weitere Informationen zu NETAPP AFF/ FAS -Plattformen finden Sie unter https://d
 
 ONTAP Select ist eine softwaredefinierte Bereitstellung von NetApp ONTAP , die auf einem Hypervisor in Ihrer Umgebung bereitgestellt werden kann.  Es kann auf VMware vSphere oder KVM installiert werden und bietet die volle Funktionalität und Erfahrung eines hardwarebasierten ONTAP Systems.
 
-Weitere Informationen zu ONTAP Select erhalten Sie, indem Sie auf https://docs.netapp.com/us-en/ontap-select/["hier,"] .
+Weitere Informationen zu ONTAP Select sind unter link:https://docs.netapp.com/us-en/ontap-select/["ONTAP Select Dokumentation"^] zu finden.
 
 
 
@@ -76,25 +76,25 @@ Weitere Informationen zu ONTAP Select erhalten Sie, indem Sie auf https://docs.n
 
 NetApp Cloud Volumes ONTAP ist eine in der Cloud bereitgestellte Version von NetApp ONTAP , die in einer Reihe öffentlicher Clouds bereitgestellt werden kann, darunter: Amazon AWS, Microsoft Azure und Google Cloud.
 
-Weitere Informationen zu Cloud Volumes ONTAP erhalten Sie, indem Sie auf https://docs.netapp.com/us-en/occm/#discover-whats-new["hier,"] .
+Weitere Informationen zu Cloud Volumes ONTAP sind im link:https://docs.netapp.com/us-en/occm/#discover-whats-new["Cloud Volumes ONTAP Dokumentation"^] zu finden.
 
 
 
 [[amazon-fsx-ontap]]
 === Amazon FSx ONTAP
 
-Amazon FSx ONTAP bietet vollständig verwalteten gemeinsam genutzten Speicher in der AWS Cloud mit den beliebten Datenzugriffs- und Verwaltungsfunktionen von ONTAP.  Weitere Informationen zu Amazon FSx ONTAP erhalten Sie, indem Sie auf https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["hier,"] .
+Amazon FSx ONTAP bietet vollständig verwalteten, gemeinsam genutzten Speicher in der AWS Cloud mit den beliebten Datenzugriffs- und Verwaltungsfunktionen von ONTAP. Weitere Informationen zu Amazon FSx for NetApp ONTAP finden sich im link:https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSx for NetApp ONTAP Dokumentation"^].
 
 
 
 [[azure-netapp-files]]
 === Azure NetApp Files
 
-Azure NetApp Files ist ein nativer, leistungsstarker Dateispeicherdienst der Enterprise-Klasse von Azure.  Es stellt Volumes als Dienst bereit, für den Sie NetApp Konten, Kapazitätspools und Volumes erstellen können.  Sie können außerdem Service- und Leistungsstufen auswählen und den Datenschutz verwalten.  Sie können leistungsstarke, hochverfügbare und skalierbare Dateifreigaben erstellen und verwalten, indem Sie dieselben Protokolle und Tools verwenden, mit denen Sie vertraut sind und auf die Sie sich vor Ort verlassen.  Weitere Informationen zu Azure NetApp Files erhalten Sie, indem Sie auf https://learn.microsoft.com/en-us/azure/azure-netapp-files/["hier,"] .
+Azure NetApp Files ist ein Azure nativer, erstklassiger, leistungsstarker Dateispeicherdienst der Enterprise-Klasse. Es werden Volumes als Dienst bereitgestellt, für die Sie NetApp Accounts, Kapazitätspools und Volumes erstellen können. Service- und Leistungsstufen können ausgewählt und der Datenschutz verwaltet werden. Leistungsstarke, hochverfügbare und skalierbare Dateifreigaben lassen sich mit denselben Protokollen und Tools erstellen und verwalten, die auch in lokalen Umgebungen vertraut und zuverlässig sind. Weitere Informationen zu Azure NetApp Files finden sich in der link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/["Azure NetApp Files-Dokumentation"^].
 
 
 
 [[google-cloud-netapp-volumes]]
 === Google Cloud NetApp Volumes
 
-Google Cloud NetApp Volumes ist ein vollständig verwalteter, Cloud-basierter Datenspeicherdienst, der erweiterte Datenverwaltungsfunktionen und hochgradig skalierbare Leistung bietet.  Damit können Sie dateibasierte Anwendungen in die Google Cloud verschieben.  Es bietet integrierte Unterstützung für die Protokolle Network File System (NFSv3 und NFSv4.1) und Server Message Block (SMB), sodass Sie Ihre Anwendungen nicht neu strukturieren müssen und weiterhin dauerhaften Speicher für Ihre Anwendungen erhalten können.  Weitere Informationen zu Google Cloud NetApp VolumesP finden Sie unter https://cloud.google.com/netapp/volumes/docs/discover/overview["hier,"] .
+Google Cloud NetApp Volumes ist ein vollständig verwalteter, Cloud-basierter Datenspeicherdienst, der fortschrittliche Datenverwaltungsfunktionen und hochskalierbare Leistung bietet. Damit können dateibasierte Anwendungen in die Google Cloud migriert werden. Unterstützung für Network File System (NFSv3 und NFSv4.1) und Server Message Block (SMB) Protokolle ist integriert, sodass Anwendungen nicht neu gestaltet werden müssen und weiterhin persistenter Speicher für die Anwendungen bereitgestellt wird. Weitere Informationen zu Google Cloud NetApp Volumes finden sich in der link:https://cloud.google.com/netapp/volumes/docs/discover/overview["Google Cloud NetApp Volumes-Dokumentation"^].

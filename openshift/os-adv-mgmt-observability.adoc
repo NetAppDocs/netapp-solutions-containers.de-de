@@ -17,18 +17,18 @@ Advanced Cluster Management für Kubernetes bietet eine Möglichkeit, die Knoten
 
 . Navigieren Sie zu „Umgebungen beobachten“ > „Übersicht“.
 +
-image:redhat-openshift-082.png["Observability-Startseite"]
+image::redhat-openshift-082.png[Observability-Startseite]
 
 . Alle Pods und Workloads in allen Clustern werden überwacht und anhand verschiedener Filter sortiert.  Klicken Sie auf Pods, um die entsprechenden Daten anzuzeigen.
 +
-image:redhat-openshift-083.png["Pods beobachten"]
+image::redhat-openshift-083.png[Pods beobachten]
 
 . Alle Knoten in den Clustern werden anhand einer Vielzahl von Datenpunkten überwacht und analysiert.  Klicken Sie auf Knoten, um mehr Einblick in die entsprechenden Details zu erhalten.
 +
-image:redhat-openshift-084.png["Knoten beobachten"]
+image::redhat-openshift-084.png[Knoten beobachten]
 
 . Alle Cluster werden basierend auf verschiedenen Clusterressourcen und -parametern überwacht und organisiert.  Klicken Sie auf „Cluster“, um Clusterdetails anzuzeigen.
 +
-image:redhat-openshift-085.png["Cluster beobachten"]
+image::redhat-openshift-085.png[Cluster beobachten]
 
 

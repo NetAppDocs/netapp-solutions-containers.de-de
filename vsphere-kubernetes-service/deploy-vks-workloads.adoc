@@ -1,0 +1,323 @@
+---
+sidebar: sidebar 
+permalink: vsphere-kubernetes-service/deploy-vks-workloads.html 
+keywords: postgresql, deployment, pvc, ontap-nas, iscsi, container application 
+summary: Eine containerisierte Anwendung in einem VKS-Cluster mit NetApp ONTAP persistentem Speicher unter Verwendung von NAS- oder SAN-Protokollen bereitstellen. 
+---
+= Eine Containeranwendung mit NetApp persistentem Speicher bereitstellen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Eine containerisierte Anwendung kann im vSphere Kubernetes Service-Cluster mit NetApp ONTAP persistentem Speicher bereitgestellt werden. Die folgenden Beispiele zeigen die Bereitstellung einer PostgreSQL Datenbank mit entweder NAS (ontap-nas) oder SAN iSCSI (ontap-san) Speicher.
+
+Die folgende YAML-Konfiguration setzt POSTGRES_USER / POSTGRES_PASSWORD direkt im Manifest. Im Produktivbetrieb wird empfohlen, Kubernetes Secrets zur Verwaltung sensibler Informationen wie Datenbank-Anmeldedaten zu verwenden.
+
+[role="tabbed-block"]
+====
+.PostgreSQL mit NAS-Speicher (ontap-nas Treiber) bereitstellen
+--
+Sie können eine PostgreSQL-Containeranwendung bereitstellen, die von einem durch den ontap-nas-Treiber bereitgestellten NFS-Persistent Volume unterstützt wird. Im folgenden Beispiel wird gezeigt, wie ein PersistentVolumeClaim (PVC) und eine Bereitstellung für PostgreSQL erstellt werden.
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  storageClassName: sc-nas # Specify the StorageClass for dynamic provisioning
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      securityContext:
+        fsGroup: 999  # Ensures proper permissions for the mounted volume (PostgreSQL default user is 999)
+      containers:
+        - name: postgres
+          image: postgres:15
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 999  # PostgreSQL default user ID
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "<username>"
+            - name: POSTGRES_PASSWORD
+              value: "<password>"
+            - name: PGDATA
+              value: "/var/lib/postgresql/data/pgdata"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+              subPath: postgres-data  # Ensures data is stored in a subdirectory to avoid permission issues
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
+----
+--
+.PostgreSQL mit SAN Speicher bereitstellen (ontap-san iSCSI Treiber)
+--
+Die folgende YAML kann verwendet werden, um eine PostgreSQL-Containeranwendung bereitzustellen, die von einem iSCSI-Persistent-Volume unterstützt wird, das durch den ontap-san Treiber bereitgestellt wird. Die `Recreate` Bereitstellungsstrategie stellt sicher, dass der Pod vollständig beendet ist, bevor ein neuer startet, was für ReadWriteOnce iSCSI-Volumes erforderlich ist und Datenbeschädigung bei Pod-Neustarts verhindert. Diese Konfiguration unterstützt die Datenpersistenz beim Löschen und Neuerstellen von Pods und ist mit Trident Volume Snapshots sowie Backup- und Restore-Operationen kompatibel.
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-block-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: sc-iscsi # Must map to an ontap-san driver
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-block-app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      # 1. POD LEVEL SECURITY CONTEXT
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999       # Official Postgres image default user ID
+        runAsGroup: 999      # Official Postgres image default group ID
+        fsGroup: 999
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: postgres
+          image: postgres:15
+          # 2. CONTAINER LEVEL SECURITY CONTEXT
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "<username>"
+            - name: POSTGRES_PASSWORD
+              value: "<password>"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-block-storage
+              subPath: postgres-data
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      volumes:
+        - name: postgres-block-storage
+          persistentVolumeClaim:
+            claimName: postgres-block-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres
+----
+--
+====
+
+
+[[validate-the-database-deployment]]
+== Die Datenbankbereitstellung validieren
+
+Nach der Bereitstellung der Anwendung sollte überprüft werden, ob die Pods im Status "Running" sind und die Datenbank betriebsbereit ist. Mit den folgenden Befehlen lässt sich der Status der Pods, PVCs und Services prüfen. Es sollte sichergestellt werden, dass die Pods laufen und die PVCs an die entsprechenden Volumes gebunden sind.
+
+[source, bash]
+----
+kubectl get all -n <namespace>
+kubectl get pvc -n <namespace>
+----
+image::vks-workload-001.png[Workload mit persistentem Speicher bereitgestellt]
+
+Je nach verwendetem Protokoll handelt es sich beim Backend-Speicher um ein Volume, einen Qtree oder eine LUN. Der im ONTAP-System bereitgestellte Speicher kann überprüft werden, indem das PersistentVolume (PV) beschrieben wird, um den internen Volume-Namen zu ermitteln, der anschließend in ONTAP CLI-Befehlen verwendet werden kann, um die Speicherdetails abzurufen. Mit dem folgenden Befehl lässt sich das PV beschreiben und der interne Volume-Name abrufen:
+
+[source, bash]
+----
+kubectl describe pv/<pv-name>
+----
+.Beispiel anzeigen
+image::vks-workload-002.png[Interner Volume-Name für NAS-Volume]
+
+image::vks-workload-003.png[Interner Volumenname für SAN LUN]
+
+Den internen Volume-Namen aus der Ausgabe kopieren und den folgenden Befehl ausführen, um die Speicherdetails von der ONTAP CLI zu erhalten.
+
+Für NAS Volumes:
+
+[source, cli]
+----
+volume show -vserver <vserver> -volume <internal-volume-name>
+----
+image::vks-workload-004.png[ONTAP CLI-Ausgabe für NAS Volume]
+
+Für SAN LUNs kann der folgende Befehl verwendet werden, um die LUN-Details aus der ONTAP CLI abzurufen:
+
+[source, cli]
+----
+lun show -vserver <vserver> -volume <internal-volume-name>
+----
+image::vks-workload-005.png[ONTAP CLI-Ausgabe für SAN LUN]
+
+Wenn Sie  `nconnect`Mount-Optionen in der Speicherklasse NAS oder NAS Economy verwendet haben, lässt sich die Anzahl der aktiven TCP-Verbindungen vom Worker-Knoten zum Speicherserver überprüfen.
+
+Zuerst die Trident Backend-Konfigurationen auflisten, um den Backend-Namen zu finden, dann diesen beschreiben, um den vserver-Namen und die Daten-LIF abzurufen:
+
+[source, bash]
+----
+kubectl get tbc -n trident
+kubectl describe tbc <backend-name> -n trident
+----
+Melden Sie sich anschließend beim ONTAP Cluster an und führen Sie den folgenden Befehl aus, wobei die Daten-LIF aus der obigen Ausgabe ersetzt wird:
+
+[source, cli]
+----
+network connections active show -local-address <data-lif> -local-port 2049
+----
+.Beispiel anzeigen
+image::vks-workload-006.png[ONTAP CLI-Ausgabe für aktive Verbindungen]
+
+Nachdem sich die Pods im Status "Running" befinden, eine Verbindung zur Datenbank herstellen und die Datenoperationen überprüfen.
+
+.Schritte
+. Den PostgreSQL-Dienstport an Ihren lokalen Rechner weiterleiten:
++
+[source, bash]
+----
+kubectl port-forward svc/postgres-service 5432:5432 -n <namespace>
+----
+. Von einem anderen Terminal aus mit psql eine Verbindung zur Datenbank herstellen:
++
+[source, bash]
+----
+psql "postgresql://<username>:<password>@127.0.0.1:5432/postgres"
+----
+. Eine Datenbank und eine Tabelle erstellen und die Tabelle anschließend mit Daten füllen:
++
+[source, sql]
+----
+CREATE DATABASE employee;
+----
++
+Zur neuen Datenbank wechseln (psql-Metabefehl):
+
++
+[source, bash]
+----
+\c employee
+----
++
+Erstellen Sie die Tabelle, fügen Sie eine Zeile ein und rufen Sie die Ergebnisse ab:
+
++
+[source, sql]
+----
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    department VARCHAR(50),
+    hire_date DATE DEFAULT CURRENT_DATE,
+    salary NUMERIC(10, 2)
+);
+
+INSERT INTO employees (first_name, last_name, email, department, salary)
+VALUES ('John', 'Doe', 'john.doe@example.com', 'Engineering', 85000.00);
+
+SELECT * FROM employees;
+----
+
+
+
+
+[[video-demonstration]]
+== Videodemonstration
+
+Das folgende Video demonstriert die Installation von Trident auf einem vSphere Kubernetes-Cluster und die Bereitstellung einer PostgreSQL Datenbank mit persistentem Speicher mithilfe von Trident.
+
+.Bereitstellung von Workloads mit ONTAP persistentem Speicher unter Verwendung von Trident
+video::eb8bd0c0-a1fe-4288-a575-b4ac00e004a9[panopto,width=360]

@@ -20,12 +20,13 @@ Die folgenden Ressourcen müssen von einem Speicheradministrator konfiguriert we
 . Navigieren Sie zu Speicher > Speicher-VMs und klicken Sie auf Hinzufügen.  Erstellen Sie zwei SVMs, eine für Projekt 1 und die andere für Projekt 2, indem Sie die erforderlichen Details angeben.  Erstellen Sie außerdem ein vsadmin-Konto, um die SVM und ihre Ressourcen zu verwalten.
 
 
-image:redhat-openshift-041.png["SVM-Erstellung auf ONTAP"]
+image::redhat-openshift-041.png[SVM-Erstellung auf ONTAP]
 
 . Melden Sie sich als Speicheradministrator beim Red Hat OpenShift-Cluster an.
 . Erstellen Sie das Backend für Projekt 1 und ordnen Sie es der für das Projekt vorgesehenen SVM zu.  NetApp empfiehlt, das vsadmin-Konto des SVM zu verwenden, um das Backend mit dem SVM zu verbinden, anstatt den ONTAP Clusteradministrator zu verwenden.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | tridentctl -n trident create backend -f
 {
@@ -41,8 +42,6 @@ cat << EOF | tridentctl -n trident create backend -f
 EOF
 ----
 
-
-
 NOTE: Für dieses Beispiel verwenden wir den ontap-nas-Treiber.  Verwenden Sie beim Erstellen des Backends je nach Anwendungsfall den entsprechenden Treiber.
 
 
@@ -50,8 +49,9 @@ NOTE: Wir gehen davon aus, dass Trident im Trident-Projekt installiert ist.
 
 . Erstellen Sie auf ähnliche Weise das Trident Backend für Projekt 2 und ordnen Sie es dem für Projekt 2 vorgesehenen SVM zu.
 . Erstellen Sie als Nächstes die Speicherklassen.  Erstellen Sie die Speicherklasse für Projekt 1 und konfigurieren Sie sie so, dass sie die Speicherpools aus dem für Projekt 1 reservierten Backend verwendet, indem Sie den Parameter „storagePools“ festlegen.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 apiVersion: storage.k8s.io/v1
@@ -66,8 +66,9 @@ EOF
 ----
 . Erstellen Sie auf ähnliche Weise eine Speicherklasse für Projekt 2 und konfigurieren Sie sie so, dass die Speicherpools vom Backend verwendet werden, die für Projekt 2 reserviert sind.
 . Erstellen Sie ein ResourceQuota, um Ressourcen in Projekt 1 einzuschränken, die Speicher von Speicherklassen anfordern, die anderen Projekten gewidmet sind.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: ResourceQuota

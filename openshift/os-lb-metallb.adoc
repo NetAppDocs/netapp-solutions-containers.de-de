@@ -25,8 +25,8 @@ MetalLB ist ein selbstgehosteter Netzwerk-Load Balancer, der auf Ihrem OpenShift
 
 Basierend darauf, wie MetalLB die den LoadBalancer-Diensten außerhalb des OpenShift-Clusters zugewiesene IP-Adresse ankündigt, arbeitet es in zwei Modi:
 
-* *Layer 2-Modus.*  In diesem Modus übernimmt ein Knoten im OpenShift-Cluster den Besitz des Dienstes und antwortet auf ARP-Anfragen für diese IP, um sie außerhalb des OpenShift-Clusters erreichbar zu machen.  Da nur der Knoten die IP ankündigt, kommt es zu einem Bandbreitenengpass und langsamen Failover-Einschränkungen.  Weitere Informationen finden Sie in der Dokumentationlink:https://metallb.universe.tf/concepts/layer2/["hier,"] .
-* *BGP-Modus.*  In diesem Modus stellen alle Knoten im OpenShift-Cluster BGP-Peering-Sitzungen mit einem Router her und geben die Routen bekannt, um den Datenverkehr an die Service-IPs weiterzuleiten.  Voraussetzung hierfür ist die Integration von MetalLB mit einem Router in das Netzwerk.  Aufgrund des Hashing-Mechanismus in BGP gibt es gewisse Einschränkungen, wenn sich die IP-zu-Knoten-Zuordnung für einen Dienst ändert.  Weitere Informationen finden Sie in der Dokumentationlink:https://metallb.universe.tf/concepts/bgp/["hier,"] .
+* *Layer 2-Modus.* In diesem Modus übernimmt ein Knoten im OpenShift Cluster die Zuständigkeit für den Service und beantwortet ARP-Anfragen für diese IP, um die Erreichbarkeit außerhalb des OpenShift Clusters zu ermöglichen. Da nur dieser Knoten die IP bekanntgibt, entsteht ein Bandbreite Engpass und es bestehen Einschränkungen beim schnellen Failover. Weitere Informationen finden sich unter link:https://metallb.universe.tf/concepts/layer2/["MetalLB Layer 2 Modus Dokumentation"^].
+* *BGP-Modus.* In diesem Modus stellen alle Knoten im OpenShift-Cluster BGP-Peering-Sitzungen mit einem Router her und kündigen die Routen an, um den Datenverkehr zu den Service-IPs weiterzuleiten. Voraussetzung hierfür ist die Integration von MetalLB mit einem Router in diesem Netzwerk. Aufgrund des Hash-Mechanismus in BGP bestehen bestimmte Einschränkungen, wenn sich die IP-zu-Knoten-Zuordnung für einen Service ändert. Weitere Informationen sind unter link:https://metallb.universe.tf/concepts/bgp/["MetalLB BGP Modus Dokumentation"^] zu finden.
 
 
 
@@ -116,6 +116,6 @@ configmap/config created
 . Wenn jetzt Loadbalancer-Dienste erstellt werden, weist MetalLB den Diensten eine externe IP zu und gibt die IP-Adresse bekannt, indem es auf ARP-Anfragen antwortet.
 +
 
-NOTE: Wenn Sie MetalLB im BGP-Modus konfigurieren möchten, überspringen Sie Schritt 6 oben und folgen Sie dem Verfahren in der MetalLB-Dokumentationlink:https://metallb.universe.tf/concepts/bgp/["hier,"] .
+NOTE: Wenn Sie MetalLB im BGP-Modus konfigurieren möchten, Schritt 6 oben wird übersprungen und die Vorgehensweise in link:https://metallb.universe.tf/concepts/bgp/["MetalLB BGP Modus Dokumentation"^] befolgt.
 
 

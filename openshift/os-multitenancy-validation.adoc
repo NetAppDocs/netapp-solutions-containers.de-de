@@ -23,14 +23,16 @@ Führen Sie die folgenden Schritte aus, um die in den vorherigen Schritten konfi
 
 . Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
 . Überprüfen Sie den Zugriff, um ein neues Projekt zu erstellen.
-+
-[source, console]
+
+
+[listing]
 ----
 oc create ns sub-project-1
 ----
 . Erstellen Sie einen PVC in Projekt 1 unter Verwendung der Speicherklasse, die Projekt 1 zugewiesen ist.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: PersistentVolumeClaim
@@ -50,20 +52,23 @@ spec:
 EOF
 ----
 . Überprüfen Sie das mit dem PVC verknüpfte PV.
-+
-[source, console]
+
+
+[listing]
 ----
 oc get pv
 ----
 . Überprüfen Sie, ob das PV und sein Volume in einer SVM erstellt werden, die für Projekt 1 auf NetApp ONTAP vorgesehen ist.
-+
-[source, console]
+
+
+[listing]
 ----
 volume show -vserver project-1-svm
 ----
 . Erstellen Sie einen Pod in Projekt 1 und mounten Sie das im vorherigen Schritt erstellte PVC.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: Pod
@@ -88,13 +93,12 @@ spec:
 EOF
 ----
 . Überprüfen Sie, ob der Pod ausgeführt wird und ob er das Volume gemountet hat.
-+
-[source, console]
+
+
+[listing]
 ----
 oc describe pods test-pvc-pod -n project-1
 ----
-
-
 
 
 [[validate-access-to-create-pvcs-or-pods-in-another-project-or-use-resources-dedicated-to-another-project]]
@@ -102,8 +106,9 @@ oc describe pods test-pvc-pod -n project-1
 
 . Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
 . Erstellen Sie einen PVC in Projekt 1 unter Verwendung der Speicherklasse, die Projekt 2 zugewiesen ist.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: PersistentVolumeClaim
@@ -123,8 +128,9 @@ spec:
 EOF
 ----
 . Erstellen Sie ein PVC in Projekt 2.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: PersistentVolumeClaim
@@ -144,15 +150,17 @@ spec:
 EOF
 ----
 . Stellen Sie sicher, dass PVCs `test-pvc-project-1-sc-2` Und `test-pvc-project-2-sc-1` wurden nicht erstellt.
-+
-[source, console]
+
+
+[listing]
 ----
 oc get pvc -n project-1
 oc get pvc -n project-2
 ----
 . Erstellen Sie einen Pod in Projekt 2.
-+
-[source, console]
+
+
+[listing]
 ----
 cat << EOF | oc create -f -
 kind: Pod
@@ -171,42 +179,44 @@ EOF
 ----
 
 
-
-
 [[validate-access-to-view-and-edit-projects-resourcequotas-and-storageclasses]]
 == Überprüfen Sie den Zugriff zum Anzeigen und Bearbeiten von Projekten, Ressourcenkontingenten und Speicherklassen.
 
 . Melden Sie sich als ocp-project-1-user, Entwickler in project-1, an.
 . Überprüfen Sie den Zugriff, um neue Projekte zu erstellen.
-+
-[source, console]
+
+
+[listing]
 ----
 oc create ns sub-project-1
 ----
 . Bestätigen Sie den Zugriff, um Projekte anzuzeigen.
-+
-[source, console]
+
+
+[listing]
 ----
 oc get ns
 ----
 . Überprüfen Sie, ob der Benutzer ResourceQuotas in Projekt 1 anzeigen oder bearbeiten kann.
-+
-[source, console]
+
+
+[listing]
 ----
 oc get resourcequotas -n project-1
 oc edit resourcequotas project-1-sc-rq -n project-1
 ----
 . Überprüfen Sie, ob der Benutzer Zugriff auf die Anzeige der Speicherklassen hat.
-+
-[source, console]
+
+
+[listing]
 ----
 oc get sc
 ----
 . Überprüfen Sie den Zugriff, um die Speicherklassen zu beschreiben.
 . Überprüfen Sie den Zugriff des Benutzers zum Bearbeiten der Speicherklassen.
-+
-[source, console]
+
+
+[listing]
 ----
 oc edit sc project-1-sc
 ----
-

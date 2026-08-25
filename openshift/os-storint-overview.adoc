@@ -18,10 +18,10 @@ Erfahren Sie mehr über NetApp Trident Protect, das für die Anwendungs- und per
 
 Trident, ein von NetApp gepflegter Open-Source-Speicherbereitsteller und -Orchestrator, bietet zusammen mit seinem Add-on, NetApp Trident Protect, robuste Lösungen für die Orchestrierung und Verwaltung persistenter Daten in containerbasierten Umgebungen wie Red Hat OpenShift.
 
-image:redhat-openshift-108.png["Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt"]
+image::redhat-openshift-108.png[Abbildung, die einen Eingabe-/Ausgabedialog zeigt oder schriftlichen Inhalt darstellt]
 
 Auf den folgenden Seiten finden Sie zusätzliche Informationen zu den NetApp -Produkten, die für die Anwendungs- und persistente Speicherverwaltung in der Red Hat OpenShift mit NetApp -Lösung validiert wurden:
 
-* link:https://docs.netapp.com/us-en/trident/["Trident -Dokumentation"]
-* link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html["Trident Protect Dokumentation"]
+* link:https://docs.netapp.com/us-en/trident/["Trident -Dokumentation"^]
+* link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html["Trident Protect Dokumentation"^]
 
