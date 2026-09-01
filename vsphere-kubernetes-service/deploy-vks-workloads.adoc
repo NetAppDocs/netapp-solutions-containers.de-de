@@ -319,5 +319,5 @@ SELECT * FROM employees;
 
 Das folgende Video demonstriert die Installation von Trident auf einem vSphere Kubernetes-Cluster und die Bereitstellung einer PostgreSQL Datenbank mit persistentem Speicher mithilfe von Trident.
 
-.Bereitstellung von Workloads mit ONTAP persistentem Speicher unter Verwendung von Trident
+.Bereitstellung von Workloads auf einem vSphere Kubernetes Service Cluster mit ONTAP persistentem Speicher unter Verwendung von Trident
 video::eb8bd0c0-a1fe-4288-a575-b4ac00e004a9[panopto,width=360]

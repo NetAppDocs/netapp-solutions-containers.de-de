@@ -4,7 +4,7 @@ permalink: vsphere-kubernetes-service/vks-overview.html
 keywords: vks, vSphere Kubernetes Service, ONTAP, kubernetes, overview 
 summary: Informationen zum vSphere Kubernetes Service und zur Integration mit NetApp ONTAP für containerisierte Workloads. 
 ---
-= Informationen zum vSphere Kubernetes Service mit NetApp ONTAP
+= Informationen zum VMware vSphere Kubernetes Service mit NetApp ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,9 +14,9 @@ summary: Informationen zum vSphere Kubernetes Service und zur Integration mit Ne
 
 
 [role="lead"]
-vSphere Kubernetes Service (VKS) ist ein Managed-Kubernetes-Angebot von VMware, das es Unternehmen ermöglicht, containerisierte Anwendungen mit Kubernetes bereitzustellen, zu verwalten und zu skalieren. In Kombination mit NetApp ONTAP Storage bietet VKS Persistenz, Performance und Datenmanagement der Enterprise-Klasse für Cloud-native Workloads.
+VMware vSphere Kubernetes Service (VKS) ist ein Managed-Kubernetes-Angebot von VMware, das es Unternehmen ermöglicht, containerisierte Anwendungen mit Kubernetes bereitzustellen, zu verwalten und zu skalieren. In Kombination mit NetApp ONTAP Speicher bietet VKS Persistenz, Leistung und Datenmanagement der Enterprise-Klasse für Cloud-native Workloads.
 
-vSphere Kubernetes Service ist typischerweise in das breitere Ökosystem von VMware integriert, wie zum Beispiel VMware Tanzu, das eine umfassende Suite von Tools für Kubernetes-Management, Anwendungsmodernisierung und DevOps-Praktiken bietet.
+VKS ist in VMware Cloud Foundation (VCF) eingebettet und entspricht dem Upstream CNCF Kubernetes, wodurch die Kompatibilität mit dem breiteren Kubernetes-Ökosystem und den zugehörigen Tools gewährleistet wird.
 
 
 
@@ -27,10 +27,10 @@ vSphere Kubernetes Service ist typischerweise in das breitere Ökosystem von VMw
 . *Integration mit der VMware-Infrastruktur:* VKS integriert sich nahtlos in VMware vSphere, NSX-T und andere VMware Lösungen, sodass Unternehmen ihre bestehende VMware Infrastruktur für Kubernetes Workloads nutzen können.
 . *Multi-Cloud und Hybrid Cloud Support:* vSphere Kubernetes Service unterstützt die Bereitstellung in privaten Clouds, öffentlichen Clouds (z. B. AWS, Azure, Google Cloud) und Hybrid Cloud-Umgebungen, was Unternehmen Flexibilität bei der Verwaltung ihrer Anwendungen bietet.
 . *Integrierte Sicherheit:* VKS beinhaltet Sicherheitsfunktionen wie rollenbasierte Zugriffssteuerung (RBAC), Richtliniendurchsetzung und Integration mit VMware NSX für Netzwerksicherheit.
-. *Entwicklerfreundliche Tools:* vSphere Kubernetes Service integriert sich mit Entwicklertools wie Tanzu Application Platform, um die Entwicklung und Bereitstellung containerisierter Anwendungen zu vereinfachen.
+. *Unterstützung für das Kubernetes-Ökosystem:* VKS unterstützt die vollständige Upstream-Kubernetes-API und gewährleistet so die Portabilität zwischen verschiedenen Umgebungen sowie die Kompatibilität mit dem gesamten Kubernetes-Ökosystem, einschließlich Tools wie Istio für Service Mesh, Prometheus für Monitoring und anderen CNCF-zertifizierten Tools. Organisationen können Standard-Kubernetes-Kenntnisse und Integrationen direkt auf VKS-Cluster anwenden.
+. *Entwicklerfreundliche Tools:* VKS unterstützt standardmäßige Kubernetes-Entwickler-Workflows, einschließlich CI/CD-Pipelines, GitOps-Praktiken und Tools wie kubectl und Helm, sodass Entwicklungsteams containerisierte Anwendungen erstellen und bereitstellen können, ohne proprietäre Schnittstellen erlernen zu müssen.
 . *Skalierbarkeit und hohe Verfügbarkeit:* VKS bietet Funktionen wie automatische Skalierung und Fehlertoleranz, um sicherzustellen, dass Anwendungen hochverfügbar und performant bleiben.
-. *Observability und Monitoring:* vSphere Kubernetes Service integriert sich mit VMware Tanzu Observability (ehemals Wavefront) und anderen Monitoring-Tools, um Echtzeit-Einblicke in die Cluster- und Anwendungsleistung bereitzustellen.
-. *Unterstützung für das Kubernetes-Ökosystem:* VKS ist vollständig mit Upstream-Kubernetes kompatibel, das heißt, es unterstützt die Kubernetes-API und funktioniert mit Kubernetes-nativen Tools wie Helm, Istio und Prometheus.
+. *Beobachtbarkeit und Überwachung:* VKS integriert sich mit standardmäßigen Kubernetes-kompatiblen Überwachungstools, um Echtzeit-Einblicke in die Cluster- und Anwendungsleistung bereitzustellen.
 
 
 

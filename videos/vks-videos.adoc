@@ -18,15 +18,22 @@ Die Integration des vSphere Kubernetes Service mit NetApp wird in einer Reihe vo
 
 
 
-[[deploying-a-vsphere-kubernetes-service-cluster-with-netapp-storage]]
-== Bereitstellung eines vSphere Kubernetes Service Clusters mit NetApp Storage
+[[create-a-vsphere-kubernetes-cluster-on-a-supervisor-cluster]]
+== Erstellung eines vSphere Kubernetes-Clusters auf einem Supervisor-Cluster
 
-.Bereitstellung eines vSphere Kubernetes Service Clusters mit NetApp Storage
+.Erstellung eines vSphere Kubernetes-Clusters auf einem Supervisor-Cluster
 video::4ef64b3c-7a68-41d5-bacf-b4a8012b49f8[panopto,width=360]
 
 
-[[deploying-workloads-with-ontap-persistent-storage-using-trident]]
-== Bereitstellung von Workloads mit ONTAP persistentem Speicher unter Verwendung von Trident
+[[create-a-vsphere-kubernetes-cluster-with-vcf-automation]]
+== Einen vSphere Kubernetes-Cluster mit VCF Automation erstellen
 
-.Bereitstellung von Workloads mit ONTAP persistentem Speicher unter Verwendung von Trident
+.Einen vSphere Kubernetes-Cluster mit VCF Automation erstellen
+video::571ced1a-58e8-4bf4-9c24-b4b10118bc22[panopto,width=360]
+
+
+[[deploying-workloads-on-a-vks-cluster-backed-by-ontap-persistent-storage-using-trident]]
+== Bereitstellung von Workloads auf einem VKS-Cluster mit persistentem ONTAP-Speicher unter Verwendung von Trident
+
+.Bereitstellung von Workloads auf einem VKS-Cluster mit persistentem ONTAP-Speicher unter Verwendung von Trident
 video::eb8bd0c0-a1fe-4288-a575-b4ac00e004a9[panopto,width=360]

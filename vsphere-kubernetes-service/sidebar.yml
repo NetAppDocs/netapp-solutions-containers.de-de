@@ -17,3 +17,10 @@ entries:
     url: "/vsphere-kubernetes-service/install-trident.html"
   - title: VKS-Workloads mit NetApp Storage bereitstellen
     url: "/vsphere-kubernetes-service/deploy-vks-workloads.html"
+- title: Datensicherung
+  pdf-filename: Datensicherung
+  entries:
+  - title: Backup und Wiederherstellung mit der NetApp Console
+    url: "/vsphere-kubernetes-service/backup-restore-console.html"
+  - title: Datensicherung und Wiederherstellung mit Trident Protect
+    url: "/vsphere-kubernetes-service/backup-restore-trident-protect.html"
