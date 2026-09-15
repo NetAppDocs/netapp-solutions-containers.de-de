@@ -14,11 +14,23 @@ summary: Containeranwendungen in einem VKS-Cluster können mit dem NetApp Backup
 
 
 [role="lead"]
-Containeranwendungen in einem vSphere Kubernetes Service (VKS) Cluster mithilfe der NetApp Console sichern und wiederherstellen. Dieses Verfahren umfasst das Erstellen und Verwalten von Backup- und Restore-Vorgängen über den Backup and Recovery Service über die NetApp Console, wobei ONTAP S3 Objektspeicher als Backup-Ziel verwendet wird.
+Containeranwendungen in einem vSphere Kubernetes Service (VKS) Cluster mit der NetApp Console sichern und wiederherstellen. Dieses Verfahren umfasst das Erstellen und Verwalten von Backup- und Wiederherstellungsvorgängen über den NetApp Backup and Recovery Service in der NetApp Console.
 
-NetApp Console ermöglicht die zentrale Verwaltung von Speicher- und Datendiensten in lokalen und Cloud-Umgebungen. Es stehen einheitliche Kontrolle, einfache Bedienung und sicheres Management zur Verfügung. Mehrere Datendienste und Verwaltungsfunktionen sind über die Benutzeroberfläche unter link:https://console.netapp.com["console.netapp.com"^] zugänglich. Vollständige Informationen zu NetApp Console finden sich unter link:https://docs.netapp.com/us-en/console-family/["NetApp Console-Dokumentation"].
+Die Beispiele umfassen die folgenden zwei Backup- und Restore-Szenarien:
 
-Dieser Abschnitt konzentriert sich auf den NetApp Backup and Recovery Datendienst für Kubernetes-Workloads, insbesondere Containeranwendungen auf vSphere Kubernetes Service-Clustern. Der NetApp Backup and Recovery Service ermöglicht das Erkennen, Verwalten, Erstellen und Zuordnen von Datensicherungsstrategien für Ihre Kubernetes-Anwendungen über eine einzige Schnittstelle. Eine vollständige Anleitung befindet sich unter link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html["NetApp Backup and Recovery Dokumentation"].
+. Datensicherung und -Wiederherstellung mit ONTAP S3 Objektspeicher als Sicherungsziel (Disk-to-Object-Workflow).
+. Datensicherung und -Wiederherstellung mit ONTAP als Backup-Ziel (Disk-to-Disk-Workflow).
+
+
+
+NOTE: Die Sicherung und Wiederherstellung mit einer 3-2-1-Fanout-Datensicherungsstrategie (Disk-to-Disk- und Disk-to-Object-Workflows) ist derzeit für VKS-Workloads nicht verfügbar.
+
+NetApp Console ermöglicht die zentrale Verwaltung von Speicher- und Datendiensten in lokalen und Cloud-Umgebungen. Sie bietet einheitliche Kontrolle, einfache Bedienung und sicheres Management. Zahlreiche Datendienste und Verwaltungsfunktionen sind über die Benutzeroberfläche unter link:https://console.netapp.com["console.netapp.com"^] zugänglich. Ausführliche Informationen zu NetApp Console finden sich unter link:https://docs.netapp.com/us-en/console-family/["NetApp Console-Dokumentation"].
+
+Dieser Abschnitt behandelt den NetApp Backup and Recovery Datendienst für Kubernetes-Workloads, insbesondere Containeranwendungen auf vSphere Kubernetes Service-Clustern. Der NetApp Backup and Recovery Service ermöglicht das Erkennen, Verwalten, Erstellen und Zuordnen von Datensicherungsstrategien zu Ihren Kubernetes-Anwendungen über eine einzige Schnittstelle. Eine vollständige Anleitung befindet sich unter link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html["NetApp Backup and Recovery Dokumentation"].
+
+
+NOTE: Dieses Verfahren setzt voraus, dass Sie bereits einen Console-Agenten in der Umgebung bereitgestellt haben, in der Ihr VKS-Cluster ausgeführt wird. Es ist sicherzustellen, dass der Agent ordnungsgemäß registriert und in der NetApp Console sichtbar ist, bevor mit Sicherungs- und Wiederherstellungsvorgängen fortgefahren wird.
 
 
 
@@ -33,7 +45,7 @@ Stellen Sie sicher, dass in der Umgebung, in der Ihr VKS-Cluster ausgeführt wir
 .Beispiel anzeigen
 [%collapsible]
 ====
-In der NetApp Console auf „Agent bereitstellen“ klicken, wie im Screenshot gezeigt, und den Agenten in der Umgebung bereitstellen, in der der VKS-Cluster ausgeführt wird.
+In der NetApp Console auf *Agent bereitstellen* klicken, wie im Screenshot gezeigt, und den Agenten in der Umgebung bereitstellen, in der der VKS Cluster ausgeführt wird.
 
 In diesem Beispiel wird *Lokal > Mit OVA* ausgewählt, die OVA-URL kopiert und diese URL in vCenter verwendet, um den Console Agent bereitzustellen.
 
@@ -53,12 +65,14 @@ Der primäre ONTAP-Cluster muss zur NetApp Console hinzugefügt und der Backup a
 .Beispiel anzeigen
 [%collapsible]
 ====
-Für diesen Schritt muss der vSphere Kubernetes-Cluster ausgeführt werden und der Console-Agent in derselben Umgebung bereitgestellt sein. Die folgenden Schritte ermöglichen die Erkennung des vSphere Kubernetes-Clusters in der NetApp Console.
+Für diesen Schritt muss der vSphere Kubernetes-Cluster ausgeführt werden und der Console-Agent in derselben Umgebung bereitgestellt sein.
+
+Die folgenden Schritte ermöglichen die Erkennung des vSphere Kubernetes-Clusters in der NetApp Console.
 
 .. In der NetApp Console *Inventar > Kubernetes* auswählen und die Details des vSphere Kubernetes-Clusters angeben.
 .. Wählen Sie den Agenten aus, der in derselben Umgebung bereitgestellt ist, in der sich der vSphere Kubernetes-Cluster befindet.
 .. Die bereitgestellten Befehle können kopiert werden, um Trident Protect zu installieren, und von einem Rechner ausgeführt werden, der mit Ihrem vSphere Kubernetes-Cluster verbunden ist.
-.. Nach erfolgreicher Installation von Trident Protect auf *Erkennen* klicken. NetApp Console erkennt den vSphere Kubernetes-Cluster und alle seine Ressourcen über den Agenten und stellt sie in der Benutzeroberfläche dar.
+.. Nach erfolgreicher Installation von Trident Protect auf *Erkennen* klicken. Die NetApp Console erkennt den vSphere Kubernetes-Cluster und alle seine Ressourcen über den Agenten und zeigt sie in der Benutzeroberfläche an.
 
 
 image::vks-console-br-007.png[Erkennung des vSphere Kubernetes-Clusters]
@@ -129,12 +143,10 @@ image::vks-console-br-006.png[ONTAP S3 Objektspeicher-Details für die Erkennung
 NOTE: Für das Erstellen und Schützen einer Kubernetes-Anwendung ist die Rolle Backup and Recovery super admin oder Backup and Recovery backup admin erforderlich. Für das Wiederherstellen einer Kubernetes-Anwendung ist die Rolle Backup and Recovery super admin oder Backup and Recovery restore admin erforderlich.
 
 +
-.Beispiel anzeigen
+.Beispiel anzeigen: Erstellen einer Anwendung für Container-Workloads
 [%collapsible]
 ====
 In diesem Schritt wird in der NetApp Console eine Anwendung für die Containeranwendungen im vSphere Kubernetes-Cluster erstellt, die geschützt werden müssen. Mit Namespaces kann eine Anwendung erstellt werden, um alle Containeranwendungen in einem Namespace im vSphere Kubernetes-Cluster zu schützen.
-
-Sie benötigen außerdem eine Datensicherungsstrategie, die Sie der Anwendung zuordnen. Es kann eine neue Datensicherungsstrategie erstellt oder eine vorhandene verwendet werden.
 
 image::vks-console-br-011.png[Anwendung für Containeranwendungen erstellen]
 
@@ -146,7 +158,14 @@ Als Nächstes sind die Schutzeinstellungen für die Anwendung anzugeben. Es kann
 
 image::vks-console-br-013.png[Neue Datensicherungsstrategie erstellen]
 
-Ein Name für die Richtlinie kann angegeben und die Backup-Architektur ausgewählt werden. In diesem Beispiel wird Festplatte zu Objektspeicher gewählt. Der lokale Snapshot-Zeitplan wird definiert, der steuert, wie oft Snapshots auf dem primären Speicher erstellt werden. Anschließend werden die Backup-Einstellungen für den Objektspeicher separat konfiguriert: Das Backup-Ziel (in diesem Beispiel ONTAP S3) wird ausgewählt, der Übertragungszeitplan festgelegt, der steuert, wann Snapshot-Daten in den Objektspeicher kopiert werden, und die Anzahl der Aufbewahrungskopien angegeben. Der Übertragungszeitplan ist unabhängig vom Snapshot-Zeitplan, daher werden Ressourcen gemäß dem Übertragungszeitplan in den Objektspeicher kopiert und nicht unmittelbar nach jeder Snapshot-Erstellung. Auch die maximale Anzahl an Wiederholungsversuchen und das Wiederholungsintervall können bei Bedarf angepasst werden. Mit *Erstellen* wird fortgefahren. Die Anwendung wird erkannt und die Datensicherungsstrategie wird ihr zugeordnet.
+====
++
+.Beispiel: Erstellen einer Datensicherungsstrategie mithilfe der Disk to Object Storage-Architektur
+[%collapsible]
+====
+Geben Sie der Datensicherungsstrategie einen Namen und wählen Sie die Backup-Architektur. In diesem Beispiel wird Disk to Object Storage gewählt. Der lokale Snapshot-Zeitplan legt fest, wie häufig Snapshots auf dem primären Storage erstellt werden. Anschließend wird das Object Storage-Ziel für die Kubernetes-Anwendungsmetadaten ausgewählt, die für Snapshots verwendet werden.
+
+Anschließend werden die Backup-Einstellungen für den Objektspeicher separat konfiguriert: Das Backup-Ziel (in diesem Beispiel ONTAP S3) wird ausgewählt, der Übertragungszeitplan festgelegt, der steuert, wann Snapshot-Daten in den Objektspeicher kopiert werden, und die Anzahl der Aufbewahrungskopien angegeben. Der Übertragungszeitplan ist unabhängig vom Snapshot-Zeitplan, daher werden Ressourcen gemäß dem Übertragungszeitplan in den Objektspeicher kopiert und nicht unmittelbar bei der Erstellung jedes Snapshots. Auch die maximale Anzahl an Wiederholungsversuchen und das Wiederholungsintervall können bei Bedarf angepasst werden. Mit *Erstellen* wird fortgefahren. Die Anwendung wird erkannt und die Datensicherungsstrategie wird ihr zugeordnet.
 
 image::vks-console-br-014.png[Name der Datensicherungsstrategie angeben]
 
@@ -159,21 +178,40 @@ image::vks-console-br-017.png[Objektspeichereinstellungen für das Backup]
 image::vks-console-br-018.png[Anwendung erstellt und Schutz abgeschlossen]
 
 ====
++
+.Beispiel: Erstellen einer Datensicherungsstrategie mithilfe der Disk to Disk-Architektur
+[%collapsible]
+====
+
+NOTE: Für die Auswahl der Disk to Disk-Architektur ist sicherzustellen, dass das sekundäre Speicherziel mit Cluster-Peering und SVM-Peering konfiguriert wurde und die erforderlichen Anmeldeinformationen sowie Berechtigungen vorhanden sind.
+
+Einen Namen für die Richtlinie angeben und die Backup-Architektur auswählen. In diesem Beispiel ist Disk to Disk ausgewählt. Den lokalen Snapshot-Zeitplan definieren, der steuert, wie oft Snapshots auf dem primären Speicher erstellt werden. Anschließend den Objektspeicherort für die Kubernetes-Anwendungsmetadaten der Snapshots auswählen.
+
+Die Einstellungen für die Sicherung des Sekundärspeichers werden separat konfiguriert: Das Sicherungsziel, der für die Sicherung konfigurierte ONTAP Cluster und die SVM sowie das Aggregat, in dem das Sicherungsvolume erstellt wird, sind aus der Dropdown-Liste auszuwählen. Der Übertragungszeitplan, der steuert, wann Snapshot-Daten in den Sekundärspeicher kopiert werden, sowie die Anzahl der Aufbewahrungskopien werden festgelegt. Der Übertragungszeitplan ist unabhängig vom Snapshot-Zeitplan, daher werden Ressourcen gemäß dem Übertragungszeitplan in das Sekundärziel kopiert und nicht unmittelbar nach der Erstellung jedes Snapshots. Das Objektspeicherziel, in dem die Anwendungsmetadaten der SnapMirror Kopien gespeichert werden, wird ebenfalls konfiguriert.
+
+Sie können bei Bedarf auch die maximale Anzahl an Wiederholungsversuchen und das Wiederholungsintervall anpassen. *Erstellen* auswählen, um fortzufahren. Die Anwendung wird erkannt und die Datensicherungsstrategie wird ihr zugeordnet.
+
+image::vks-console-br-027.png[Den Namen der Datensicherungsstrategie angeben und die Backup-Architektur auswählen]
+
+image::vks-console-br-028.png[Lokale Snapshot-Einstellungen]
+
+image::vks-console-br-029.png[Sekundärspeichereinstellungen für die Festplatten-zu-Festplatten-Sicherung]
+
+====
 . *Anwendung aus einem Backup wiederherstellen*
 +
 
 NOTE: Für die Wiederherstellung einer Kubernetes-Anwendung ist die Rolle Backup and Recovery super admin oder Backup and Recovery restore admin erforderlich.
 
 +
-.Beispiel anzeigen
-[%collapsible]
-====
-** Sie können jeden verfügbaren Wiederherstellungspunkt auswählen, also einen lokalen Snapshot, ein Objektspeicher-Backup oder ein Backup von einem sekundären Ziel, um die Anwendung wiederherzustellen.
+** Sie können jeden verfügbaren Wiederherstellungspunkt auswählen, sei es ein lokaler Snapshot, eine Sicherung aus dem Objektspeicher oder eine Sicherung von einem sekundären Ziel, um die Anwendung wiederherzustellen.
 ** Sie können die Anwendung in ihrem ursprünglichen Namensraum oder in einem anderen Namensraum wiederherstellen.
 ** Sie können auswählen, welche Ressourcen in die Wiederherstellung einbezogen werden.
 ** Sie können die Speicherklasse auswählen, die für die wiederhergestellten Anwendungsressourcen verwendet werden soll.
-
-
++
+.Beispiel: Wiederherstellung aus dem Objektspeicher in einen anderen Namensraum
+[%collapsible]
+====
 image::vks-console-br-019.png[Anwendung aus Sicherung wiederherstellen]
 
 image::vks-console-br-020.png[Einen Wiederherstellungspunkt auswählen]
@@ -184,13 +222,50 @@ image::vks-console-br-022.png[Alle oder einige Ressourcen zum Wiederherstellen a
 
 image::vks-console-br-023.png[Speicherklasse für wiederhergestellte Ressourcen auswählen]
 
+====
++
+.Beispiel anzeigen: Wiederherstellung von einem Datenträger in denselben Namespace
+[%collapsible]
+====
+image::vks-console-br-030.png[Einen Wiederherstellungspunkt auswählen]
+
+image::vks-console-br-031.png[Sekundäres Festplatten-Backup sowie Cluster- und Namespace-Ziel auswählen]
+
+image::vks-console-br-032.png[Alle oder einige Ressourcen zum Wiederherstellen auswählen]
+
+image::vks-console-br-033.png[Speicherklasse für wiederhergestellte Ressourcen auswählen]
+
+====
++
 Im Abschnitt „Monitor“ der NetApp Console lässt sich der Fortschritt des Wiederherstellungsjobs beobachten. Nach Abschluss des Wiederherstellungsjobs sind die wiederhergestellten Ressourcen im vSphere Kubernetes-Cluster sichtbar.
 
++
+.Beispiel anzeigen: Wiederhergestellte Anwendung im selben oder in einem anderen Namensraum
+[%collapsible]
+====
 image::vks-console-br-024.png[Fortschritt des Wiederherstellungsjobs überwachen]
 
 image::vks-console-br-025.png[Abgeschlossener Wiederherstellungsvorgang]
 
-image::vks-console-br-026.png[Wiederhergestellte Anwendung]
+image::vks-console-br-026.png[Anwendung in einem anderen Namensraum wiederhergestellt]
+
+image::vks-console-br-034.png[Anwendung im selben Namensraum wiederhergestellt]
 
 ====
 
+
+
+
+
+
+[[video-demonstration]]
+== Videodemonstration
+
+Im folgenden Video wird gezeigt, wie Workloads auf einem VKS-Cluster mithilfe der NetApp Console im ONTAP S3-Objektspeicher gesichert und anschließend auf dem vSphere Kubernetes-Cluster wiederhergestellt werden.
+
+.Workloads auf einem VKS-Cluster im Object Store sichern und mithilfe der NetApp Console wiederherstellen
+video::02f61f3c-ae52-4f0b-9fe7-b4c0012ac7d8[panopto,width=360]
+Das folgende Video bietet einen Überblick über die Funktionen von NetApp Console Local.
+
+.NetApp Console Lokale Übersicht
+video::5a0bdd54-7d38-494a-a224-b4b60011547f[panopto,width=360]
