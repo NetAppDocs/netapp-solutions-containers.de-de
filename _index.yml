@@ -18,18 +18,14 @@ indexpage:
       url: "/blogs.html"
     - title: Videos und Demos
       url: "/videos/index.html"
-  - title: Anthos mit NetApp
+  - title: vSphere Kubernetes Service mit NetApp
     links:
     - title: Lösungsübersicht
-      url: "/anthos/anthos-solution-overview.html"
-    - title: Anthos-Cluster auf VMware
-      url: "/anthos/anthos-vmw.html"
-    - title: Anthos auf Bare Metal
-      url: "/anthos/anthos-bm.html"
+      url: "/vsphere-kubernetes-service/vks-overview.html"
     - title: NetApp Storage-Integrationen
-      url: "/anthos/anthos-storint-overview.html"
-    - title: Anwendungsfall
-      url: "/anthos/anthos-deploy-app-cloud-console.html"
+      url: "/vsphere-kubernetes-service/netapp-storage-vks.html"
+    - title: Datenschutz
+      url: "/vsphere-kubernetes-service/backup-restore-console.html"
   - title: Red Hat OpenShift mit NetApp
     links:
     - title: Lösungsübersicht
@@ -42,12 +38,26 @@ indexpage:
       url: "/openshift/os-storint-overview.html"
     - title: Anwendungsfälle
       url: "/openshift/os-use-cases.html"
+  - title: Anthos mit NetApp
+    links:
+    - title: Lösungsübersicht
+      url: "/anthos/anthos-solution-overview.html"
+    - title: Anthos-Cluster auf VMware
+      url: "/anthos/anthos-vmw.html"
+    - title: Anthos auf Bare Metal
+      url: "/anthos/anthos-bm.html"
+    - title: NetApp Storage-Integrationen
+      url: "/anthos/anthos-storint-overview.html"
+    - title: Anwendungsfall
+      url: "/anthos/anthos-deploy-app-cloud-console.html"
   - title: Partnerlösungen
     links:
-    - title: Anthos-Website
-      url: https://cloud.google.com/anthos
+    - title: vSphere Kubernetes Service-Website
+      url: https://www.vmware.com/products/cloud-infrastructure/vsphere-kubernetes-service
     - title: Red Hat OpenShift-Website
       url: https://www.redhat.com/en/technologies/cloud-computing/openshift
+    - title: Anthos-Website
+      url: https://cloud.google.com/anthos
   - title: Lösungsanfragen und Feedback
     links:
     - title: Automatisierung anfordern

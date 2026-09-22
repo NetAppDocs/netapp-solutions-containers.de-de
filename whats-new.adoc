@@ -15,6 +15,13 @@ Erfahren Sie, was es Neues bei Containerlösungen gibt.
 
 
 
+[[21-september-2026]]
+== 21. September 2026
+
+Die VMware vSphere Kubernetes Service mit NetApp ONTAP Lösung wurde zu den NetApp Containerlösungen hinzugefügt: link:https://docs.netapp.com/us-en/netapp-solutions-containers/vsphere-kubernetes-service/vks-overview.html["vSphere Kubernetes Service-Lösungen"^].
+
+
+
 [[18-august-2025]]
 == 18. August 2025
 
