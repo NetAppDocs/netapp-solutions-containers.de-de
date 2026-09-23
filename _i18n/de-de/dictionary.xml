@@ -2024,4 +2024,6 @@
   <block id="2a7082b3041267482d987446d5d04d6a" category="sidebar">vSphere Kubernetes Service mit NetApp</block>
   <block id="7e7397a7b79323762c61941fc0e6b5f9" category="sidebar">Datenschutz</block>
   <block id="07c4740cbbae657ab5643e7f4cd45995" category="sidebar">vSphere Kubernetes Service-Website</block>
+  <block id="afafad34831fd7bf5a2da8e40c7a486a" category="paragraph">Die in dieser Matrix aufgeführten Releases sind die Releases, anhand derer die Lösung zum Zeitpunkt der Veröffentlichung dieser Dokumentation validiert wurde.</block>
+  <block id="c36ad65c3abcd6fccd80322445b32436" category="paragraph">Zusätzliche Funktionen werden kontinuierlich mit den neuesten Versionen von ONTAP, NetApp Trident und Red Hat OpenShift getestet, die von Trident unterstützt werden. Die neueste von Trident unterstützte OpenShift Version ist unter <block ref="c63c485b5af8afb2964e185bd11227c5" category="inline-link-macro-rx"></block> zu finden.</block>
 </blocks>
